@@ -1,0 +1,26 @@
+A agenda deverá ter as seguintes funcionalidades:
+
+1 Cadastro de clientes com as seguintes informações:
+	1.1 Nome
+	1.2 Telefone
+	1.3 Data de Nascimento
+	1.4 Gênero
+2 Edição de um cadastro.
+3 Remoção de um cadastro.
+4 Listagem de todos os cliente em ordem alfabética.
+5 Listagem de somente os clientes de um determinado gênero em ordem alfabética.
+6 Para cada cliente a lista dos serviços e/ou produtos que este consumiu.
+7 Relatórios básicos com as sehuintes informações:
+	7.1 Idade média de todo o público de uma unidade.
+	7.2 Idade média do público para um determinado gênero.
+	7.3 Serviço mais procurado para todo o público.
+	7.4 Serviço mais procurado para determinado gênero.
+8 Capacidade de Persistência de dados:
+	8.1 A agena deverá ser salva em um arquivo em disco rígido.
+
+IMPORTANT
+	O software será executado em linhas de comando.
+	O software deverá ser portável para desktop.
+
+DELIVERABLES
+	O software funcionando para teste e todos os códigos e diagramas desenvolvidos.
