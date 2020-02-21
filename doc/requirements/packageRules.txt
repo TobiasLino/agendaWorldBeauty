@@ -1,0 +1,21 @@
+Os dados deverão ser organizados em pacotes
+O padrão de pacotes será:
+	br.com.fatec.lista1.<nome do pacote>
+	onde:
+	br - público brasileiro
+	com - comercial
+	fatec - instituição
+	lista1 - nome do projeto:
+		lista1 a lista6.
+	<nome do pacote> - pacotes deverão ser pouco aplocados e coesos com suas funcionalidades.
+		Os nomes de pacotes deverão ser todos em inglês.
+	Exemplo:
+		br.com.fatec.lista1.client
+			Armazena as classes Clients, Phones e CustomerStories.
+		br.com.fatec.lista1.register.removal
+			Armazena as classes de Remoção de um cadastro.
+
+		ou ainda:
+
+		br.com.fatec.lista1.menu.main
+			Armazena somente a classe main que opera sobre os menus.
