@@ -1,0 +1,43 @@
+Requisitos Funcionais
+	REQFUNC01 - Opção de Cadastro dos Clientes.
+		1.1 Cadastro de clientes deverá conter:
+			Nome, Telefone, Data de Nascimento e Gênero.
+		1.2 Cada cliente deverá ter uma lista dos serviços ou produtos que consumiu.
+		1.3 A movimentação dos clientes na unidade deverá ser salva em um arquivo.
+		1.4 Telefone deverá ser um Objeto.
+		1.6 Os dados digitados deverão ser armazenados na memória até que o usuário as salve.
+		1.5 O menu de cadastro deverá conter as seguintes opções:
+			1.5.1 Salvar.
+			1.5.2 Cancelar.
+			1.5.3 Ajuda.
+				1.5.3.1 A opção de ajuda deverá mostrar dicas de como o usuário deverá realizar a operação de cadastro, bem como a descrição para cada uma das opções.
+		1.6 A navegação no menu de cadastro deverá ser feita conforme o usuário digita a opção numérica corresponde para a operação.
+		1.7 Serão aceitos dados em Branco, com excessão do Nome e data de nascimento.
+		1.8 Ao digitar o nome de usuário, o sistema deverá realizar uma busca no Banco de Dados dos nomes de clientes já cadastrados, para evitar duplicadas.
+			1.8.1 A busca deverá abranger nome e sobrenome.
+			1.8.2 A busca deverá abranger maiúsculas e minúsculas.
+			1.8.3 Se o cliente já estiver sido cadastrado, o sistema deverá emitir uma mensagem ao usuário de que o cliente já possui cadastro, com uma sugestão:
+			1.8.3.1 O usuário poderá ser direcionado ao menu de edição do cliente selecionado.
+			1.8.3.2 O usuário poderá ser direcionado para o menu de Cadastro de Compras do cliente.
+		## opcional 
+		 Cada cliente terá um histórico de compras na unidade.
+
+	REQFUN02 - Opção para remover um cadastro.
+		2.1 A opção precisa ficar explícita no menu do programa.
+		2.2 A opção precisa de confirmação antes de excluir.
+		2.3 A remoção de um cliente só irá remover os dados do cliente do sistema, mas suas movimentações na empresa ainda continuarão cadastradas.
+		2.4 O menu de remoção deverá conter as seguintes opções:
+			2.4.1 Salvar.
+			2.4.2 Cancelar.
+			2.4.3 Ajuda.
+		2.5 A navegação deverá ser feita conforme o usuário digita a opção numérica correspondente.
+
+	REQFUNC03 - Edição de um Cadastro.
+		3.1 As alterações deverão ser mantidas na memória até que o usuário as salve.
+		3.2 Ao salvar, o usuário precisará confirmar a sua eescolha.
+		3.3 As informações deverão estar todas dispostas em um menu.
+		3.4 O menu de edições deverá contar com as opções:
+			3.4.1 Salvar.
+			3.4.2 Cancelar.
+			3.4.3 Ajuda.
+		3.5 A navegação no menu deverá ser feita conforme o usuário digita a opção numérica correspondente.
