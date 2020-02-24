@@ -1,5 +1,6 @@
 package br.com.fatec.lista1.registration;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Client {
@@ -7,16 +8,39 @@ public class Client {
     private Date birth_;
     private String gender_;		// masculino, feminino e não binário.
     private Phone phone_;
-    private CustomerHistory historic_;
+    private Historic historic_;
 
+    public Client() {
+        name_ = "";
+        birth_ = null;
+        gender_ = "";
+        phone_ = null;
+        historic_ = null;
+    }
     public Client(String nome, Date nascimento) {
         this.name_ = nome;
         this.birth_ = nascimento;
+        historic_ = new Historic();
     }
     public Client(String nome, Date nascimento, String genero) {
         this.name_ = nome;
         this.birth_ = nascimento;
         this.gender_ = genero;
+    }
+
+    public void AddPurchase(Purchase novaCompra) {
+        historic_.Add(novaCompra);
+    }
+
+    public void Print() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String var = "Nome: " + name_ + "\n"
+                + "Nascimento: " + df.format(birth_) + "\n"
+                + "Gênero: " + gender_ + "\n";
+        if (phone_ != null) {
+            var += "Telefone: " + phone_.getNumber_();
+        }
+        System.out.println(var);
     }
 
     public String getName_() {
@@ -51,15 +75,15 @@ public class Client {
         this.phone_ = phone_;
     }
 
-    public CustomerHistory getHistoric_() {
+    public Historic getHistoric_() {
         return historic_;
     }
 
-    public void setHistoric_(CustomerHistory historic_) {
+    public void setHistoric_(Historic historic_) {
         this.historic_ = historic_;
     }
 
-    protected boolean isEqual(Client cl) {
+    public boolean isEqual(Client cl) {
         return this.name_.equals(cl.name_);
     }
 }

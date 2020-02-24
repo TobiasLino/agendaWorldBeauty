@@ -1,0 +1,83 @@
+package br.com.fatec.lista1.view;
+
+import br.com.fatec.lista1.registration.Client;
+
+import java.util.Date;
+import java.util.Scanner;
+import java.util.concurrent.ConcurrentLinkedDeque;
+
+public class Menus {
+    public int mainMenu() {
+        int opcao;
+        Scanner scan = new Scanner(System.in);
+        String n = "\nEscolha a opção desejada:\n"
+                + "\t1. Cadastrar Cliente.\n"
+                + "\t2. Realizar Compra.\n"
+                + "\t3. Listar Clientes.\n"
+                + "\t4. Excluir Cliente.\n"
+                + "\t5. Editar Cliente.\n"
+                + "\t6. Gerar Relatório.\n"
+                + "\t7. Histórico.\n"
+                + "\t8. Sair.";
+        System.out.println(n);
+        System.out.print("Qual sua opção? ");
+        opcao = Integer.parseInt(scan.nextLine());
+        return opcao;
+    }
+
+    public int insertClientOptions() {
+        int opcao = 0;
+        Scanner scan = new Scanner(System.in);
+        String n = "\nInsira a opção correspondente:\n"
+                + "\t1. Inserir Nome.\n"
+                + "\t2. Inserir Data de Nascimento.\n"
+                + "\t3. Inserir Gênero.\n"
+                + "\t4. Inserir Telenofe.\n"
+                + "\t5. Inserir Compra.\n"
+                + "\t6.Cancelar.\n"
+                + "\t7.Confirmar.";
+        System.out.println(n);
+        System.out.print("Qual sua opção? ");
+        opcao = Integer.parseInt(scan.nextLine());
+        return opcao;
+    }
+
+    public void InsertClient() {
+        int option = 0;
+        Client novoCliente = new Client();
+        while (option != 7) {
+            option = insertClientOptions();
+            switch (option) {
+                case 1 : insertName(novoCliente); break;
+                case 2 : insertBirth(novoCliente); break;
+                default:
+                    System.out.println("Digite uma opção válida");
+            }
+        }
+        if (confirmOption()) {
+
+        }
+    }
+
+    public void insertName(Client cliente) {
+        Scanner n = new Scanner(System.in);
+        System.out.print("Insira o nome: ");
+        cliente.setName_(n.toString());
+    }
+
+    public void insertBirth(Client cliente) {
+        Scanner n = new Scanner(System.in);
+        Date d = new Date(n.toString());
+        System.out.print("Insira a Data de Nascimento");
+        cliente.setBirth_(d);
+    }
+
+
+    public boolean confirmOption() {
+        System.out.println("Confirmar sua opção? (S/n)");
+        Scanner scan = new Scanner(System.in);
+        return scan.toString().equals("")
+                || scan.toString().equals("S")
+                || scan.toString().equals("s");
+    }
+}
