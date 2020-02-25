@@ -1,0 +1,32 @@
+Classe Principal que mantém todos os clientes numa lista alfabética.
+
+public class Agenda {
+    public final int CHARVALUE = 65;
+    private List<Client>[] agenda_ = new LinkedList[27];
+
+    public Agenda()
+    public Client findIt(Client client)
+    public void addTo(Client cliente);
+    public int Size();
+    public void Print();
+}
+
+
+Exemplo de implementação:
+
+	Agenda a = new Agenda();
+	Date dat = new Date();
+	Client cl1 = new Client("Tobias", dat);
+	Client cl2 = new Client("Tania", dat);
+	Client cl3 = new Client("José", dat, "Masculino");
+	Client cl4 = new Client("Jana", dat, "Faminino");
+	Client cl5 = new Client("Amanda", dat, "Feminino");
+
+	a.add(cl1);
+	a.add(cl2);
+	a.add(cl3);
+	a.add(cl4);
+	a.add(cl5);
+
+	a.Print();       // Imprime todos os clientes
+        	         // em ordem alfabética

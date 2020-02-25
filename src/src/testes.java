@@ -8,35 +8,33 @@ public class testes {
     public static void main(String[] args) {
         Agenda a = new Agenda();
         Date dat = new Date();
-        Client cl1 = new Client("Tobias", dat);
-        Client cl2 = new Client("Tania", dat);
-        Client cl3 = new Client("José", dat, "Masculino");
-        Client cl4 = new Client("Jana", dat, "Faminino");
-        Client cl5 = new Client("Amanda", dat, "Feminino");
 
-        a.addTo(cl1.getName_(), cl1);
-        a.addTo(cl2.getName_(), cl2);
-        a.addTo(cl3.getName_(), cl3);
-        a.addTo(cl4.getName_(), cl4);
-        a.addTo(cl5.getName_(), cl5);
-/*
-        Client test = a.findIt(cl1);
-        test.Print();
+        Client cl1 = new Client("Amanda", dat, "Feminino");
+        Phone tAmanda = new Phone("12 9966558822");
+        cl1.setPhone_(tAmanda);
+        Client cl2 = new Client("José", dat, "Masculino");
+        Phone tJose = new Phone("11 966552233");
+        cl2.setPhone_(tJose);
+        Client cl3 = new Client("Jana", dat, "Feminino");
+        Phone tJana = new Phone("14 978551244");
+        cl3.setPhone_(tJana);
+        Client cl4 = new Client("Amanda", dat, "Feminino");
+        Phone tAmanda2 = new Phone("12 9966558822");
+        cl1.setPhone_(tAmanda2);
+        Client cl5 = new Client("José", dat, "Masculino");
+        Phone tJose2 = new Phone("11 966552233");
+        cl2.setPhone_(tJose2);
+        Client cl6 = new Client("Jana", dat, "Feminino");
+        Phone tJana2 = new Phone("14 978551244");
+        cl3.setPhone_(tJana2);
 
-        test = a.findIt(cl2);
-        test.Print();
+        a.add(cl1);
+        a.add(cl2);
+        a.add(cl3);
+        a.add(cl4);
+        a.add(cl5);
 
-        test = a.findIt(cl3);
-        test.Print();
-
-        test = a.findIt(cl4);
-        test.Print();
-
-        test = a.findIt(cl5);
-        test.Print();
-
- */
-
-        a.Print();
+        System.out.println("Tamanho : " + a.size());
+        a.print();
     }
 }

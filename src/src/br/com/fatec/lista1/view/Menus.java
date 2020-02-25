@@ -1,10 +1,10 @@
 package br.com.fatec.lista1.view;
 
+import br.com.fatec.lista1.agenda.Agenda;
 import br.com.fatec.lista1.registration.Client;
 
 import java.util.Date;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Menus {
     public int mainMenu() {
@@ -22,6 +22,7 @@ public class Menus {
         System.out.println(n);
         System.out.print("Qual sua opção? ");
         opcao = Integer.parseInt(scan.nextLine());
+        scan.close();
         return opcao;
     }
 
@@ -32,7 +33,7 @@ public class Menus {
                 + "\t1. Inserir Nome.\n"
                 + "\t2. Inserir Data de Nascimento.\n"
                 + "\t3. Inserir Gênero.\n"
-                + "\t4. Inserir Telenofe.\n"
+                + "\t4. Inserir Telefone.\n"
                 + "\t5. Inserir Compra.\n"
                 + "\t6.Cancelar.\n"
                 + "\t7.Confirmar.";
@@ -50,12 +51,11 @@ public class Menus {
             switch (option) {
                 case 1 : insertName(novoCliente); break;
                 case 2 : insertBirth(novoCliente); break;
+                case 6 : return;
+                case 7 : if (confirmOption()) return;
                 default:
                     System.out.println("Digite uma opção válida");
             }
-        }
-        if (confirmOption()) {
-
         }
     }
 
@@ -63,21 +63,32 @@ public class Menus {
         Scanner n = new Scanner(System.in);
         System.out.print("Insira o nome: ");
         cliente.setName_(n.toString());
+        n.close();
     }
 
     public void insertBirth(Client cliente) {
         Scanner n = new Scanner(System.in);
-        Date d = new Date(n.toString());
+        Date d = new Date();
         System.out.print("Insira a Data de Nascimento");
         cliente.setBirth_(d);
+        n.close();
     }
-
 
     public boolean confirmOption() {
         System.out.println("Confirmar sua opção? (S/n)");
         Scanner scan = new Scanner(System.in);
-        return scan.toString().equals("")
+        if (scan.toString().equals("")
                 || scan.toString().equals("S")
-                || scan.toString().equals("s");
+                || scan.toString().equals("s")) {
+            scan.close();
+            return true;
+        }
+        scan.close();
+        return false;
+    }
+
+    public void listaClientes(Agenda agenda) {
+        System.out.println("\n\nListando todos os clientes Cadastrados.");
+        agenda.print();
     }
 }
