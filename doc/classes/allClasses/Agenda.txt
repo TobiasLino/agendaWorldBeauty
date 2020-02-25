@@ -1,14 +1,36 @@
 Classe Principal que mantém todos os clientes numa lista alfabética.
 
 public class Agenda {
-    public final int CHARVALUE = 65;
+    // Consiste na utilização de um vetor de 27 elementos (total de letras do alfabéto + 1)
+    // cada qual é uma lista para Cliente cujo nomes começam com a letra correspondente ao índice.
     private List<Client>[] agenda_ = new LinkedList[27];
 
-    public Agenda()
-    public Client findIt(Client client)
-    public void addTo(Client cliente);
+    // O construtor default instância cada elemento do vetor como sendo do tipo LinkedList;
+    public Agenda();
+
+    // Busca de cliente por meio do nome.
+    public Client findIt(String name);
+
+    // Adiciona um novo cliente.
+    public void add(Client cliente);
+
+    // Remove o cliente forncendo o seu nome.
+    public void remove(String name);
+
+    // Retorna quantos clientes esão na lista
     public int Size();
+
+    // Imprime todos os clientes.
     public void Print();
+
+    // 
+    // Foi identificado que para se obter o índice de uma letra no alfabéto,
+    // basta subtrair 65 do valor da char, assim: 'A' == 0, 'B' == 1.
+    // Exemplo:
+    //		String name = "José";
+    //		int index = getIndex(name);	// pega a primeira letra de name
+    //		print(index);	// o resultado é 9
+    public int getIndex(String str);
 }
 
 
