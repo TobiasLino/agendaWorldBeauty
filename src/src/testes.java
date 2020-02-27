@@ -12,7 +12,7 @@ public class testes {
         Client cl1 = new Client("Amanda", dat, "Feminino");
         Phone tAmanda = new Phone("12 9966558822");
         cl1.setPhone_(tAmanda);
-        Client cl2 = new Client("José", dat, "Masculino");
+        Client cl2 = new Client("José de Macedo", dat, "Masculino");
         Phone tJose = new Phone("11 966552233");
         cl2.setPhone_(tJose);
         Client cl3 = new Client("Jana", dat, "Feminino");
@@ -21,7 +21,7 @@ public class testes {
         Client cl4 = new Client("Amanda", dat, "Feminino");
         Phone tAmanda2 = new Phone("12 9966558822");
         cl1.setPhone_(tAmanda2);
-        Client cl5 = new Client("José", dat, "Masculino");
+        Client cl5 = new Client("José Otávio", dat, "Masculino");
         Phone tJose2 = new Phone("11 966552233");
         cl2.setPhone_(tJose2);
         Client cl6 = new Client("Jana", dat, "Feminino");
@@ -34,7 +34,10 @@ public class testes {
         a.add(cl4);
         a.add(cl5);
 
-        System.out.println("Tamanho : " + a.size());
+        System.out.println("Tamanho : " + a.size() + "\n\nANTES:");
+        a.print();
+        a.remove("José Otávio");
+        System.out.println("Tamanho: " + a.size() + "\n\nDEPOIS");
         a.print();
     }
 }

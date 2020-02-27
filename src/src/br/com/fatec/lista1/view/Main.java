@@ -29,8 +29,9 @@ public class Main {
 
         while (true) {
             switch (menu.mainMenu()) {
-                case 1 : menu.InsertClient(); break;
+                case 1 : menu.InsertClient(a); break;
                 case 3 : menu.listaClientes(a); break;
+                case 5 : menu.editaCliente(a); break;
                 case 8 : return;
                 default:
                     System.out.println("Digite uma opção válida.");

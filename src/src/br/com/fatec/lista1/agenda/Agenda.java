@@ -10,21 +10,14 @@ import java.util.*;
  *      Date dat = new Date();
  *      Client cl1 = new Client("Tobias", dat);
  *      Client cl2 = new Client("Tania", dat);
- *      Client cl3 = new Client("José", dat, "Masculino");
- *      Client cl4 = new Client("Jana", dat, "Faminino");
- *      Client cl5 = new Client("Amanda", dat, "Feminino");
  *
  *      a.addTo(cl1.getName_(), cl1);
  *      a.addTo(cl2.getName_(), cl2);
- *      a.addTo(cl3.getName_(), cl3);
- *      a.addTo(cl4.getName_(), cl4);
- *      a.addTo(cl5.getName_(), cl5);
  *
  *      a.Print();      // Imprime todos os clientes
  *                      // em ordem alfabética
 */
 public class Agenda {
-    public final int CHARVALUE = 65;
     private List<Client>[] agenda_;
 
     public Agenda() {
@@ -35,23 +28,36 @@ public class Agenda {
         }
     }
 
-    public Client findIt(Client client) {
-        char v = client.getName_().charAt(0);
-        int i = v - CHARVALUE;
-        int value = agenda_[i].indexOf(client);
-        Client achado = agenda_[i].get(value);
-        if (achado != null) {
-            return achado;
-        } else {
-            return null;
+    public Client findIt(String name) {
+        int index = getIndex(name);
+        int value;
+        Iterator i = agenda_[index].iterator();
+        for (;i.hasNext();) {
+            value = agenda_[index].indexOf(i.next());
+            if (name.equals(agenda_[index].get(value).getName_())) {
+                return agenda_[index].get(value);
+            }
         }
+        return null;
     }
 
     public void add(Client cliente) {
-        Client novoCliente = cliente;
-        char index = cliente.getName_().charAt(0);
-        int i = index - CHARVALUE;
-        agenda_[i].add(novoCliente);
+        int i = getIndex(cliente.getName_());
+        agenda_[i].add(cliente);
+    }
+
+    public void remove(String name) {
+        int index = getIndex(name);
+        int valor;
+        Client lixo = new Client();
+        lixo.setName_(name);
+        Iterator i = agenda_[index].iterator();
+        for (;i.hasNext();) {
+            valor = agenda_[index].indexOf(i.next());
+            if (lixo.getName_().equals(agenda_[index].get(valor).getName_())) {
+                i.remove();
+            }
+        }
     }
 
     public int size() {
@@ -76,5 +82,20 @@ public class Agenda {
                 System.out.println();
             }
         }
+    }
+
+    public boolean contains(Client cliente) {
+        Client tmp = findIt(cliente.getName_());
+        return tmp == null ? false : true;
+    }
+
+    public boolean contains(String clientName) {
+        Client tmp = findIt(clientName);
+        return tmp == null ? false : true;
+    }
+
+    public int getIndex(String str) {
+        char var = str.charAt(0);
+        return var - 65;
     }
 }

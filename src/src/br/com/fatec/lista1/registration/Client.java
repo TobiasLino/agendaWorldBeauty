@@ -11,9 +11,9 @@ public class Client {
     private Historic historic_;
 
     public Client() {
-        name_ = "";
+        name_ = "null";
         birth_ = null;
-        gender_ = "";
+        gender_ = "null";
         phone_ = null;
         historic_ = null;
     }
@@ -34,9 +34,13 @@ public class Client {
 
     public void Print() {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String var = "Nome: " + name_ + "\n"
-                + "Nascimento: " + df.format(birth_) + "\n"
-                + "Gênero: " + gender_ + "\n";
+        String var = "Nome: " + name_ + "\n";
+        if (birth_ != null) {
+            var += "Nascimento: " + df.format(birth_) + "\n";
+        }
+        if (gender_ != "null ") {
+            var += "Gênero: " + gender_ + "\n";
+        }
         if (phone_ != null) {
             var += "Telefone: " + phone_.getNumber_();
         }

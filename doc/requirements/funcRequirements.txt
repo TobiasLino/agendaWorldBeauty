@@ -46,3 +46,13 @@ Requisitos Funcionais
 		4.1 Será utilizada uma lista auto-organizada.
 			4.1.1 O tipo de objeto será um vetor de tamanho 27(26 letras do alfabeto + 1), onde cada elemento corresponde a uma lista de clientes com nomes que comecem com a letra correspondente(A == 0, B == 1, J == 9).
 			4.1.2 Listando os clientes desta forma, evitamos chamar um método de ordenação toda vez que inserir-mos um novo cliente na agenda, sendo necessário apenas quando formos listá-la.
+
+    REQFUNC05 - Opção de Realizar compra.
+        5.1 Para cada cliente, o sistema deverá fornecer uma lista dos produtos/serviços que este consumiu.
+    
+    REQFUNC06 - Gerar relatórios com as seguintes informações:
+        6.1 Idade média de todo público da unidade.
+        6.2 Idade média do público para um determinado gênero.
+        6.3 Serviço mais procurado para todo o público.
+        6.4 Serviço mais procurado para determinado gênero.
+
