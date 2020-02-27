@@ -5,24 +5,26 @@ import java.util.Date;
 
 public class Client {
     private String name_;		// obrigatório
-    private Date birth_;
+    private int age_;
+    private String birth_;
     private String gender_;		// masculino, feminino e não binário.
     private Phone phone_;
     private Historic historic_;
 
     public Client() {
         name_ = "null";
-        birth_ = null;
+        age_ = 0;
+        birth_ = "null";
         gender_ = "null";
         phone_ = null;
         historic_ = null;
     }
-    public Client(String nome, Date nascimento) {
+    public Client(String nome, String nascimento) {
         this.name_ = nome;
         this.birth_ = nascimento;
         historic_ = new Historic();
     }
-    public Client(String nome, Date nascimento, String genero) {
+    public Client(String nome, String nascimento, String genero) {
         this.name_ = nome;
         this.birth_ = nascimento;
         this.gender_ = genero;
@@ -33,10 +35,9 @@ public class Client {
     }
 
     public void Print() {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String var = "Nome: " + name_ + "\n";
-        if (birth_ != null) {
-            var += "Nascimento: " + df.format(birth_) + "\n";
+        if (birth_ != "null") {
+            var += "Nascimento: " + birth_ + "\n";
         }
         if (gender_ != "null ") {
             var += "Gênero: " + gender_ + "\n";
@@ -55,11 +56,19 @@ public class Client {
         this.name_ = name_;
     }
 
-    public Date getBirth_() {
+    public int getAge() {
+        return age_;
+    }
+
+    public void setAge(int idade) {
+        age_ = idade;
+    }
+
+    public String getBirth_() {
         return birth_;
     }
 
-    public void setBirth_(Date birth_) {
+    public void setBirth_(String birth_) {
         this.birth_ = birth_;
     }
 

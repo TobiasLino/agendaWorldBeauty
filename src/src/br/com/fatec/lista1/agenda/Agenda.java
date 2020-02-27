@@ -60,6 +60,10 @@ public class Agenda {
         }
     }
 
+    public void remove(Client cliente) {
+        remove(cliente.getName_());
+    }
+
     public int size() {
         int i, tamanho = 0;
         for (i = 0; i < agenda_.length; ++i) {
@@ -79,6 +83,42 @@ public class Agenda {
                 n = agenda_[i].indexOf(ref.next());
                 tmp = agenda_[i].get(n);
                 tmp.Print();
+                System.out.println();
+            }
+        }
+    }
+
+    public void printMale() {
+        int i, n;
+        Iterator ref;
+        Client tmp;
+        for (i = 0; i < agenda_.length; ++i) {
+            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
+            ref = agenda_[i].iterator();
+            for (; ref.hasNext();) {
+                n = agenda_[i].indexOf(ref.next());
+                tmp = agenda_[i].get(n);
+                if (tmp.getGender_().charAt(0) == 'M'
+                        || tmp.getGender_().charAt(0) == 'm')
+                    tmp.Print();
+                System.out.println();
+            }
+        }
+    }
+
+    public void printFemale() {
+        int i, n;
+        Iterator ref;
+        Client tmp;
+        for (i = 0; i < agenda_.length; ++i) {
+            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
+            ref = agenda_[i].iterator();
+            for (; ref.hasNext();) {
+                n = agenda_[i].indexOf(ref.next());
+                tmp = agenda_[i].get(n);
+                if (tmp.getGender_().charAt(0) == 'F'
+                        || tmp.getGender_().charAt(0) == 'f')
+                    tmp.Print();
                 System.out.println();
             }
         }

@@ -4,8 +4,6 @@ import br.com.fatec.lista1.agenda.Agenda;
 import br.com.fatec.lista1.registration.Client;
 import br.com.fatec.lista1.registration.Phone;
 
-import java.awt.print.Pageable;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Menus {
@@ -14,12 +12,12 @@ public class Menus {
         Scanner scan = new Scanner(System.in);
         String n = "\nEscolha a opção desejada:\n"
                 + "\t1. Cadastrar Cliente.\n"
-                + "\t2. Realizar Compra.\n"
-                + "\t3. Listar Clientes.\n"
-                + "\t4. Excluir Cliente.\n"
-                + "\t5. Editar Cliente.\n"
-                + "\t6. Gerar Relatório.\n"
-                + "\t7. Histórico.\n"
+                + "\t2. Listar Clientes.\n"
+                + "\t3. Listar Clientes Masculinos.\n"
+                + "\t4. Listar Clientes Femininos.\n"
+                + "\t5. Excluir Cliente.\n"
+                + "\t6. Editar Cliente.\n"
+                + "\t7. Gerar Relatório.\n"
                 + "\t8. Sair.";
         System.out.println(n);
         System.out.print("Qual sua opção? ");
@@ -35,9 +33,8 @@ public class Menus {
                 + "\t2. Inserir Data de Nascimento.\n"
                 + "\t3. Inserir Gênero.\n"
                 + "\t4. Inserir Telefone.\n"
-                + "\t5. Inserir Compra.\n"
-                + "\t6.Cancelar.\n"
-                + "\t7.Confirmar.";
+                + "\t5.Cancelar.\n"
+                + "\t6.Confirmar.";
         System.out.println(n);
         System.out.print("Qual sua opção? ");
         opcao = Integer.parseInt(scan.nextLine());
@@ -46,38 +43,14 @@ public class Menus {
 
     public void adicionaCliente(Agenda agenda, Client cliente) {
         agenda.add(cliente);
-        System.out.println("Adiciona CLiente");
+        System.out.println("Adiciona Cliente");
     }
 
     public void InsertClient(Agenda agenda) {
-        int option = 0;
         Client novoCliente = new Client();
-        while (option != 1) {
-            option = insertClientOptions();
-            switch (option) {
-                case 1 : insertName(novoCliente); option = 0; break;
-                // case 2 : insertBirth(novoCliente); option = 0; break;
-                case 3 : insertGender(novoCliente); option = 0; break;
-                case 4 : insertPhone(novoCliente); option = 0; break;
-                case 6 : return;
-                case 7 :
-                    if (confirmaNome(novoCliente)) {
-                        if (confirmOption()) {
-                            adicionaCliente(agenda, novoCliente);
-                            option = 1;
-                            break;
-                        } else {
-                            option = 0; break;
-                        }
-                    } else {
-                        System.out.println("O cliente não possui nome");
-                        option = 0; break;
-                    }
-                default:
-                    System.out.println("Digite uma opção válida");
-            }
-        }
+        editaClienteInfos(agenda, novoCliente);
     }
+
     public boolean confirmaNome(Client client) {
         if (client.getName_() != "null") {
             return true;
@@ -92,9 +65,8 @@ public class Menus {
 
     public void insertBirth(Client cliente) {
         Scanner n = new Scanner(System.in);
-        Date d = new Date();
         System.out.print("Insira a Data de Nascimento");
-        cliente.setBirth_(d);
+        cliente.setBirth_(n.nextLine());
     }
 
     public void insertGender(Client cliente) {
@@ -124,25 +96,78 @@ public class Menus {
         agenda.print();
     }
 
-    public boolean verificaCliente(Agenda agenda) {
-        String nome = getOption("Insira o nome do Cliente [0 para sair]: ");
-        if (nome == "0") return false;
+    public void listaClientesM(Agenda agenda) {
+        System.out.println("\n\nListando todos os Clientes Masculinos.");
+        agenda.printMale();
+    }
+
+    public void listaClientesF(Agenda agenda) {
+        System.out.println("\n\nListando todos os Clientes Femininos.");
+        agenda.printFemale();
+    }
+
+    public boolean verificaCliente(String name, Agenda agenda) {
         boolean verified = true;
-        if (agenda.contains(nome)) {
+        if (agenda.contains(name)) {
             return verified;
         } else {
             System.out.println("Cliente não encontrado.");
             verified = false;
-            verificaCliente(agenda);
+            verificaCliente(name, agenda);
         }
         return verified;
     }
-    public void editaCliente(Agenda agenda) {
-        if (verificaCliente(agenda)) {
-            System.out.println("Encontrado");
-            return;
+
+    public Client getClient(String name, Agenda agenda) {
+        if (agenda.contains(name)) {
+            Client l = agenda.findIt(name);
+            return l;
         } else {
-            return;
+            return null;
+        }
+
+    }
+
+    public void editaClienteInfos(Agenda agenda, Client cliente) {
+        int option = 0;
+        while (option != 1) {
+            option = insertClientOptions();
+            switch (option) {
+                case 1 : insertName(cliente); option = 0; break;
+                case 2 : insertBirth(cliente); option = 0; break;
+                case 3 : insertGender(cliente); option = 0; break;
+                case 4 : insertPhone(cliente); option = 0; break;
+                case 5 : return;
+                case 6 :
+                    if (confirmaNome(cliente)) {
+                        if (confirmOption()) {
+                            adicionaCliente(agenda, cliente);
+                            option = 1;
+                            break;
+                        } else {
+                            option = 0; break;
+                        }
+                    } else {
+                        System.out.println("O cliente não possui nome");
+                        option = 0; break;
+                    }
+                default:
+                    System.out.println("Digite uma opção válida");
+            }
+        }
+    }
+
+    public void editaCliente(Agenda agenda) {
+        String name = getOption("Digite o nome do cliente: ");
+        Client toEdit = agenda.findIt(name);
+        editaClienteInfos(agenda, toEdit);
+    }
+
+    public void removeCliente(Agenda agenda) {
+        String name = getOption("Digite o nome do cliente: ");
+        if (verificaCliente(name, agenda)) {
+            Client lx = getClient(name, agenda);
+            agenda.remove(lx);
         }
     }
 
