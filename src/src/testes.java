@@ -12,7 +12,7 @@ public class testes {
 
         Client cl1 = new Client();
         cl1.setName_("Tobias Lino");
-        cl1.setAge("18");
+        cl1.setAge(18);
         cl1.setGender_("Masculino");
         cl1.setBirth_("24/10/2001");
         Phone tel = new Phone("12 996819353");
@@ -21,7 +21,7 @@ public class testes {
         Client cl2 = new Client();
         cl2.setName_("Malvina Bezerra");
         cl2.setGender_("Feminino");
-        cl2.setAge("82");
+        cl2.setAge(82);
         cl2.setBirth_("12/02/1938");
 
         a1.add(cl1);

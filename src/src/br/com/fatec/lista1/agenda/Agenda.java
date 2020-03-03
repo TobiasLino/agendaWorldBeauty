@@ -3,40 +3,24 @@ package br.com.fatec.lista1.agenda;
 import br.com.fatec.lista1.registration.Client;
 
 import java.util.*;
-/*
- *  Classe Principal que mantém todos os clientes numa lista alfabética.
- *  Exemplo:
- *      Agenda a = new Agenda();
- *      Date dat = new Date();
- *      Client cl1 = new Client("Tobias", dat);
- *      Client cl2 = new Client("Tania", dat);
- *
- *      a.addTo(cl1.getName_(), cl1);
- *      a.addTo(cl2.getName_(), cl2);
- *
- *      a.Print();      // Imprime todos os clientes
- *                      // em ordem alfabética
-*/
+
+
 public class Agenda {
-    final int ALPHABETLEN = 26;
     protected List<Client>[] agenda_;
 
     public Agenda() {
-        agenda_ = new LinkedList[ALPHABETLEN + 1];
-        int i = 0;
-        for (;i < 27; ++i) {
-            agenda_[i] = new LinkedList<Client>();
+        int ALPHABETLEN = 26;
+        agenda_ = new List[ALPHABETLEN + 1];
+        for (List<Client> clients : agenda_) {
+            clients = new LinkedList<>();
         }
     }
 
     public Client findIt(String name) {
-        int index = getIndex(name);
-        int value;
-        Iterator i = agenda_[index].iterator();
-        for (;i.hasNext();) {
-            value = agenda_[index].indexOf(i.next());
-            if (name.equals(agenda_[index].get(value).getName_())) {
-                return agenda_[index].get(value);
+        for (List<Client> clientes : agenda_) {
+            for (Client client : clientes) {
+                if (client.getName_().equals(name))
+                    return client;
             }
         }
         return null;
@@ -52,12 +36,10 @@ public class Agenda {
         int valor;
         Client lixo = new Client();
         lixo.setName_(name);
-        Iterator i = agenda_[index].iterator();
-        for (;i.hasNext();) {
-            valor = agenda_[index].indexOf(i.next());
-            if (lixo.getName_().equals(agenda_[index].get(valor).getName_())) {
-                i.remove();
-            }
+        // Iterator i = agenda_[index].iterator();
+        for (Client client : agenda_[index])
+            if (client.getName_().equals(name)) {
+                remove(client);
         }
     }
 
@@ -75,17 +57,17 @@ public class Agenda {
 
     public void sort() {
         Client tmp;
-        for (int i = 0; i < agenda_.length; ++i) {
-            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
+        for (List<Client> clients : agenda_) {
+            clients.sort(Comparator.comparing(Client::getName_));
         }
     }
 
     public void print() {
         Client tmp;
-        for (int i = 0; i < agenda_.length; ++i) {
-            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
-            for (int j = 0; j < agenda_[i].size(); ++j) {
-                tmp = agenda_[i].get(j);
+        for (List<Client> clients : agenda_) {
+            clients.sort(Comparator.comparing(Client::getName_));
+            for (Client client : clients) {
+                tmp = client;
                 tmp.Print();
             }
         }
@@ -96,36 +78,22 @@ public class Agenda {
     }
 
     public void printMale() {
-        int i, n;
-        Iterator ref;
-        Client tmp;
-        for (i = 0; i < agenda_.length; ++i) {
-            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
-            ref = agenda_[i].iterator();
-            for (; ref.hasNext();) {
-                n = agenda_[i].indexOf(ref.next());
-                tmp = agenda_[i].get(n);
-                if (tmp.getGender_().charAt(0) == 'M'
-                        || tmp.getGender_().charAt(0) == 'm')
-                    tmp.Print();
+        for (List<Client> clientes : agenda_) {
+            for (Client client : clientes) {
+                if (client.getGender_().charAt(0) == 'M'
+                        || client.getGender_().charAt(0) == 'm')
+                    client.Print();
                 System.out.println();
             }
         }
     }
 
     public void printFemale() {
-        int i, n;
-        Iterator ref;
-        Client tmp;
-        for (i = 0; i < agenda_.length; ++i) {
-            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
-            ref = agenda_[i].iterator();
-            for (; ref.hasNext();) {
-                n = agenda_[i].indexOf(ref.next());
-                tmp = agenda_[i].get(n);
-                if (tmp.getGender_().charAt(0) == 'F'
-                        || tmp.getGender_().charAt(0) == 'f')
-                    tmp.Print();
+        for (List<Client> clientes : agenda_) {
+            for (Client client : clientes) {
+                if (client.getGender_().charAt(0) == 'F'
+                        || client.getGender_().charAt(0) == 'f')
+                    client.Print();
                 System.out.println();
             }
         }
@@ -133,12 +101,12 @@ public class Agenda {
 
     public boolean contains(Client cliente) {
         Client tmp = findIt(cliente.getName_());
-        return tmp == null ? false : true;
+        return tmp != null;
     }
 
     public boolean contains(String clientName) {
         Client tmp = findIt(clientName);
-        return tmp == null ? false : true;
+        return tmp != null;
     }
 
     public int getIndex(String str) {

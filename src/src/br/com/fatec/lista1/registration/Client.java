@@ -3,8 +3,8 @@ package br.com.fatec.lista1.registration;
 import java.io.Serializable;
 
 public class Client implements Serializable {
-    private String name_;		// obrigatório
-    private String age_;
+    private String name_;
+    private int age_;
     private String birth_;
     private String gender_;		// masculino, feminino e não binário.
     private Phone phone_;
@@ -12,33 +12,31 @@ public class Client implements Serializable {
 
     public Client() {
         name_ = "null";
-        age_ = "0";
+        age_ = 0;
         birth_ = "null";
         gender_ = "null";
         phone_ = null;
         historic_ = null;
     }
+
     public Client(String nome, String nascimento) {
         this.name_ = nome;
         this.birth_ = nascimento;
         historic_ = new Historic();
     }
+
     public Client(String nome, String nascimento, String genero) {
         this.name_ = nome;
         this.birth_ = nascimento;
         this.gender_ = genero;
     }
 
-    public void AddPurchase(Purchase novaCompra) {
-        historic_.Add(novaCompra);
-    }
-
     public void Print() {
         String var = "Nome: " + name_ + "\n";
-        if (birth_ != "null") {
+        if (!birth_.equals("null")) {
             var += "Nascimento: " + birth_ + "\n";
         }
-        if (gender_ != "null ") {
+        if (!gender_.equals("null ")) {
             var += "Gênero: " + gender_ + "\n";
         }
         if (phone_ != null) {
@@ -49,10 +47,10 @@ public class Client implements Serializable {
 
     public String infos() {
         String var = "Nome: " + name_ + "\n";
-        if (birth_ != "null") {
+        if (!birth_.equals("null")) {
             var += "Nascimento: " + birth_ + "\n";
         }
-        if (gender_ != "null ") {
+        if (!gender_.equals("null ")) {
             var += "Gênero: " + gender_ + "\n";
         }
         if (phone_ != null) {
@@ -70,11 +68,11 @@ public class Client implements Serializable {
         this.name_ = name_;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age_;
     }
 
-    public void setAge(String idade) {
+    public void setAge(int idade) {
         age_ = idade;
     }
 
