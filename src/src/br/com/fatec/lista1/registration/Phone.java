@@ -1,6 +1,8 @@
 package br.com.fatec.lista1.registration;
 
-public class Phone {
+import java.io.Serializable;
+
+public class Phone implements Serializable {
     private String number_;
 
     public Phone() {

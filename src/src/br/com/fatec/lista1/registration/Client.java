@@ -1,11 +1,10 @@
 package br.com.fatec.lista1.registration;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.Serializable;
 
-public class Client {
+public class Client implements Serializable {
     private String name_;		// obrigatório
-    private int age_;
+    private String age_;
     private String birth_;
     private String gender_;		// masculino, feminino e não binário.
     private Phone phone_;
@@ -13,7 +12,7 @@ public class Client {
 
     public Client() {
         name_ = "null";
-        age_ = 0;
+        age_ = "0";
         birth_ = "null";
         gender_ = "null";
         phone_ = null;
@@ -48,6 +47,21 @@ public class Client {
         System.out.println(var);
     }
 
+    public String infos() {
+        String var = "Nome: " + name_ + "\n";
+        if (birth_ != "null") {
+            var += "Nascimento: " + birth_ + "\n";
+        }
+        if (gender_ != "null ") {
+            var += "Gênero: " + gender_ + "\n";
+        }
+        if (phone_ != null) {
+            var += "Telefone: " + phone_.getNumber_();
+        }
+        var += "\n";
+        return var;
+    }
+
     public String getName_() {
         return name_;
     }
@@ -56,11 +70,11 @@ public class Client {
         this.name_ = name_;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age_;
     }
 
-    public void setAge(int idade) {
+    public void setAge(String idade) {
         age_ = idade;
     }
 

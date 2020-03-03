@@ -18,10 +18,11 @@ import java.util.*;
  *                      // em ordem alfabética
 */
 public class Agenda {
-    private List<Client>[] agenda_;
+    final int ALPHABETLEN = 26;
+    protected List<Client>[] agenda_;
 
     public Agenda() {
-        agenda_ = new LinkedList[27];
+        agenda_ = new LinkedList[ALPHABETLEN + 1];
         int i = 0;
         for (;i < 27; ++i) {
             agenda_[i] = new LinkedList<Client>();
@@ -72,20 +73,26 @@ public class Agenda {
         return tamanho;
     }
 
-    public void print() {
-        int i, n;
-        Iterator ref;
+    public void sort() {
         Client tmp;
-        for (i = 0; i < agenda_.length; ++i) {
+        for (int i = 0; i < agenda_.length; ++i) {
             Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
-            ref = agenda_[i].iterator();
-            for (; ref.hasNext();) {
-                n = agenda_[i].indexOf(ref.next());
-                tmp = agenda_[i].get(n);
+        }
+    }
+
+    public void print() {
+        Client tmp;
+        for (int i = 0; i < agenda_.length; ++i) {
+            Collections.sort(agenda_[i], Comparator.comparing(Client::getName_));
+            for (int j = 0; j < agenda_[i].size(); ++j) {
+                tmp = agenda_[i].get(j);
                 tmp.Print();
-                System.out.println();
             }
         }
+    }
+
+    public List<Client> getClients(int index) {
+        return agenda_[index];
     }
 
     public void printMale() {

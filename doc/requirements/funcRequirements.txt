@@ -56,3 +56,7 @@ Requisitos Funcionais
         6.3 Serviço mais procurado para todo o público.
         6.4 Serviço mais procurado para determinado gênero.
 
+    REQFUNC07 - O sistema deverá salvar todos os dados dos clientes em um arquivo e lê-lo quando o programa inicializar.
+        7.1 O arquivo deverá ser lido sempre que o programa inicializar e seus dados deverão ser dispersos seguindo as regras da lista de clientes.
+        7.2 O arquivo será salvo sempre que o programa realizar um cadastro.
+

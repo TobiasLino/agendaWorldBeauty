@@ -1,48 +1,40 @@
 import br.com.fatec.lista1.agenda.Agenda;
+import br.com.fatec.lista1.filemanipulation.FileManip;
 import br.com.fatec.lista1.registration.Client;
 import br.com.fatec.lista1.registration.Phone;
 
-import java.util.Date;
+import java.io.IOException;
 
 public class testes {
-    public static void main(String[] args) {
-        Agenda a = new Agenda();
-        Date dat = new Date();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Agenda a1 = new Agenda();
+        Agenda a2 = new Agenda();
 
-        Client cl1 = new Client("Amanda", "24/10/2001", "Feminino");
-        Phone tAmanda = new Phone("12 9966558822");
-        cl1.setPhone_(tAmanda);
-        Client cl2 = new Client("José de Macedo", "24/10/2001", "M");
-        Phone tJose = new Phone("11 966552233");
-        cl2.setPhone_(tJose);
-        Client cl3 = new Client("Jana", "24/10/2001", "Feminino");
-        Phone tJana = new Phone("14 978551244");
-        cl3.setPhone_(tJana);
-        Client cl4 = new Client("Amanda", "24/10/2001", "F");
-        Phone tAmanda2 = new Phone("12 9966558822");
-        cl1.setPhone_(tAmanda2);
-        Client cl5 = new Client("José Otávio", "24/10/2001", "M");
-        Phone tJose2 = new Phone("11 966552233");
-        cl2.setPhone_(tJose2);
-        Client cl6 = new Client("Jana", "24/10/2001", "F");
-        Phone tJana2 = new Phone("14 978551244");
-        cl3.setPhone_(tJana2);
+        Client cl1 = new Client();
+        cl1.setName_("Tobias Lino");
+        cl1.setAge("18");
+        cl1.setGender_("Masculino");
+        cl1.setBirth_("24/10/2001");
+        Phone tel = new Phone("12 996819353");
+        cl1.setPhone_(tel);
 
-        a.add(cl1);
-        a.add(cl2);
-        a.add(cl3);
-        a.add(cl4);
-        a.add(cl5);
+        Client cl2 = new Client();
+        cl2.setName_("Malvina Bezerra");
+        cl2.setGender_("Feminino");
+        cl2.setAge("82");
+        cl2.setBirth_("12/02/1938");
 
-        System.out.println("Tamanho : " + a.size() + "\n\nANTES:");
-        a.print();
-        a.remove("José Otávio");
-        System.out.println("Tamanho: " + a.size() + "\n\nDEPOIS");
-        a.print();
+        a1.add(cl1);
+        a1.add(cl2);
 
-        System.out.println("Male::");
-        a.printMale();
-        System.out.println("Female::");
-        a.printFemale();
+        FileManip fl = new FileManip();
+
+        fl.sync(a1);
+
+        fl.Read(a2);
+
+        a1.print();
+        a1.sort();
+        a1.print();
     }
 }
