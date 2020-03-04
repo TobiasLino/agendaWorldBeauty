@@ -1,108 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>br.com.fatec.lista1.view.Main</OriginalElement>
+  <OriginalElement>br.com.fatec.lista1.view.Operations</OriginalElement>
   <nodes>
-    <node x="67.5832298136646" y="872.0">br.com.fatec.lista1.agenda.Agenda</node>
-    <node x="164.08322981366462" y="1111.0">br.com.fatec.lista1.view.Menus</node>
-    <node x="1.8332298136645875" y="372.5">br.com.fatec.lista1.registration.Phone</node>
-    <node x="63.138095238095275" y="1363.0">br.com.fatec.lista1.view.Main</node>
-    <node x="137.55465838509318" y="587.0">br.com.fatec.lista1.registration.Client</node>
-    <node x="202.5237060041408" y="-24.0">br.com.fatec.lista1.registration.Purchase</node>
-    <node x="175.57246376811597" y="282.0">br.com.fatec.lista1.registration.Historic</node>
+    <node x="78.72136243386245" y="1690.0">br.com.fatec.lista1.view.Menus</node>
+    <node x="336.0" y="909.0">br.com.fatec.lista1.agenda.Agenda</node>
+    <node x="66.82380952380947" y="375.0">br.com.fatec.lista1.registration.Phone</node>
+    <node x="488.27136243386246" y="1414.5">br.com.fatec.lista1.filemanipulation.FileManip</node>
+    <node x="311.92830687830684" y="2068.0">br.com.fatec.lista1.view.Main</node>
+    <node x="0.0" y="1333.0">br.com.fatec.lista1.view.Operations</node>
+    <node x="291.27136243386246" y="590.0">br.com.fatec.lista1.registration.Client</node>
+    <node x="343.98564814814813" y="0.0">br.com.fatec.lista1.registration.Purchase</node>
+    <node x="353.2025793650794" y="284.0">br.com.fatec.lista1.registration.Historic</node>
+    <node x="140.55357142857142" y="102.5">java.io.Serializable</node>
   </nodes>
   <notes />
   <edges>
     <edge source="br.com.fatec.lista1.registration.Historic" target="br.com.fatec.lista1.registration.Purchase">
-      <point x="77.66666666666666" y="-117.5" />
-      <point x="369.7391304347826" y="262.0" />
-      <point x="318.7237060041408" y="262.0" />
-      <point x="33.19999999999999" y="116.0" />
-    </edge>
-    <edge source="br.com.fatec.lista1.view.Main" target="br.com.fatec.lista1.view.Menus">
-      <point x="28.5" y="-27.0" />
-      <point x="167.63809523809527" y="1323.0" />
-      <point x="212.58322981366462" y="1323.0" />
-      <point x="-48.5" y="96.0" />
+      <point x="0.0" y="-118.0" />
+      <point x="483.7025793650794" y="259.0" />
+      <point x="460.86064814814813" y="259.0" />
+      <point x="23.375" y="117.0" />
     </edge>
     <edge source="br.com.fatec.lista1.registration.Client" target="br.com.fatec.lista1.registration.Phone">
-      <point x="-59.714285714285694" y="-117.5" />
-      <point x="182.34037267080748" y="557.0" />
-      <point x="105.08322981366459" y="557.0" />
-      <point x="44.25" y="27.0" />
+      <point x="-56.85714285714283" y="-129.5" />
+      <point x="333.91421957671963" y="560.0" />
+      <point x="181.44880952380947" y="560.0" />
+      <point x="49.125" y="27.0" />
     </edge>
     <edge source="br.com.fatec.lista1.agenda.Agenda" target="br.com.fatec.lista1.registration.Client">
-      <point x="43.0" y="-94.5" />
-      <point x="196.58322981366462" y="852.0" />
-      <point x="224.6379917184265" y="852.0" />
-      <point x="-17.416666666666686" y="117.5" />
+      <point x="-76.0" y="-187.0" />
+      <point x="374.0" y="889.0" />
+      <point x="390.77136243386246" y="889.0" />
+      <point x="0.0" y="129.5" />
     </edge>
-    <edge source="br.com.fatec.lista1.registration.Client" target="br.com.fatec.lista1.registration.Purchase">
-      <point x="-29.857142857142833" y="-117.5" />
-      <point x="212.19751552795034" y="547.0" />
-      <point x="165.07246376811597" y="547.0" />
-      <point x="165.07246376811597" y="252.0" />
-      <point x="219.12370600414081" y="252.0" />
-      <point x="-66.39999999999998" y="116.0" />
-    </edge>
-    <edge source="br.com.fatec.lista1.view.Main" target="br.com.fatec.lista1.agenda.Agenda">
-      <point x="-9.5" y="-27.0" />
-      <point x="129.63809523809527" y="1343.0" />
-      <point x="131.2202898550725" y="1343.0" />
-      <point x="131.2202898550725" y="1086.0" />
-      <point x="96.24989648033129" y="1086.0" />
-      <point x="-57.333333333333314" y="94.5" />
+    <edge source="br.com.fatec.lista1.view.Menus" target="br.com.fatec.lista1.view.Operations">
+      <point x="-71.19999999999996" y="-164.0" />
+      <point x="185.5213624338625" y="1665.0" />
+      <point x="228.0" y="1665.0" />
+      <point x="76.0" y="153.5" />
     </edge>
     <edge source="br.com.fatec.lista1.view.Menus" target="br.com.fatec.lista1.agenda.Agenda">
-      <point x="-64.66666666666671" y="-96.0" />
-      <point x="196.41656314699787" y="1086.0" />
-      <point x="210.91656314699793" y="1086.0" />
-      <point x="57.333333333333314" y="94.5" />
+      <point x="142.39999999999998" y="-164.0" />
+      <point x="399.12136243386243" y="1665.0" />
+      <point x="404.15" y="1665.0" />
+      <point x="-45.60000000000002" y="187.0" />
     </edge>
-    <edge source="br.com.fatec.lista1.registration.Client" target="br.com.fatec.lista1.registration.Historic">
-      <point x="0.0" y="-117.5" />
-      <point x="242.05465838509318" y="537.0" />
-      <point x="214.4057971014493" y="537.0" />
-      <point x="-77.66666666666666" y="117.5" />
-    </edge>
-    <edge source="br.com.fatec.lista1.view.Main" target="br.com.fatec.lista1.registration.Client">
-      <point x="66.5" y="-27.0" />
-      <point x="205.63809523809527" y="1343.0" />
-      <point x="368.5832298136646" y="1343.0" />
-      <point x="368.5832298136646" y="852.0" />
-      <point x="329.1379917184265" y="852.0" />
-      <point x="87.08333333333337" y="117.5" />
-    </edge>
-    <edge source="br.com.fatec.lista1.view.Main" target="br.com.fatec.lista1.registration.Phone">
-      <point x="-47.5" y="-27.0" />
-      <point x="91.63809523809527" y="1333.0" />
-      <point x="39.0" y="1333.0" />
-      <point x="39.0" y="567.0" />
-      <point x="46.08322981366459" y="567.0" />
-      <point x="-14.75" y="27.0" />
-    </edge>
-    <edge source="br.com.fatec.lista1.registration.Purchase" target="br.com.fatec.lista1.registration.Client">
-      <point x="66.39999999999998" y="116.0" />
-      <point x="351.92370600414074" y="252.0" />
-      <point x="419.072463768116" y="252.0" />
-      <point x="419.072463768116" y="567.0" />
-      <point x="331.6260869565217" y="567.0" />
-      <point x="89.57142857142856" y="-117.5" />
+    <edge source="br.com.fatec.lista1.registration.Client" target="java.io.Serializable">
+      <point x="-28.428571428571445" y="-129.5" />
+      <point x="362.342791005291" y="550.0" />
+      <point x="320.0481481481482" y="550.0" />
+      <point x="320.0481481481482" y="259.0" />
+      <point x="239.55357142857142" y="259.0" />
+      <point x="33.0" y="14.5" />
     </edge>
     <edge source="br.com.fatec.lista1.view.Menus" target="br.com.fatec.lista1.registration.Client">
-      <point x="64.66666666666667" y="-96.0" />
-      <point x="325.74989648033124" y="1086.0" />
-      <point x="313.3333333333333" y="1086.0" />
-      <point x="313.3333333333333" y="852.0" />
-      <point x="294.30465838509315" y="852.0" />
-      <point x="52.25" y="117.5" />
+      <point x="71.20000000000005" y="-164.0" />
+      <point x="327.9213624338625" y="1665.0" />
+      <point x="325.5" y="1665.0" />
+      <point x="325.5" y="889.0" />
+      <point x="362.3427910052911" y="889.0" />
+      <point x="-28.428571428571388" y="129.5" />
+    </edge>
+    <edge source="br.com.fatec.lista1.view.Main" target="br.com.fatec.lista1.view.Menus">
+      <point x="-21.375" y="-27.0" />
+      <point x="376.05330687830684" y="2048.0" />
+      <point x="345.72136243386245" y="2048.0" />
+      <point x="89.0" y="164.0" />
+    </edge>
+    <edge source="br.com.fatec.lista1.registration.Phone" target="java.io.Serializable">
+      <point x="0.0" y="-27.0" />
+      <point x="132.32380952380947" y="259.0" />
+      <point x="173.55357142857142" y="259.0" />
+      <point x="-33.0" y="14.5" />
+    </edge>
+    <edge source="br.com.fatec.lista1.filemanipulation.FileManip" target="br.com.fatec.lista1.registration.Client">
+      <point x="43.0" y="-72.0" />
+      <point x="617.2713624338625" y="869.0" />
+      <point x="476.05707671957674" y="869.0" />
+      <point x="85.28571428571428" y="129.5" />
+    </edge>
+    <edge source="br.com.fatec.lista1.view.Operations" target="br.com.fatec.lista1.agenda.Agenda">
+      <point x="114.0" y="-153.5" />
+      <point x="266.0" y="1308.0" />
+      <point x="358.8" y="1308.0" />
+      <point x="-91.19999999999999" y="187.0" />
+    </edge>
+    <edge source="br.com.fatec.lista1.view.Main" target="br.com.fatec.lista1.agenda.Agenda">
+      <point x="21.375" y="-27.0" />
+      <point x="418.80330687830684" y="2038.0" />
+      <point x="466.77136243386246" y="2038.0" />
+      <point x="466.77136243386246" y="1308.0" />
+      <point x="450.0" y="1308.0" />
+      <point x="0.0" y="187.0" />
+    </edge>
+    <edge source="br.com.fatec.lista1.filemanipulation.FileManip" target="br.com.fatec.lista1.agenda.Agenda">
+      <point x="-43.0" y="-72.0" />
+      <point x="531.2713624338625" y="1308.0" />
+      <point x="541.1999999999999" y="1308.0" />
+      <point x="91.19999999999993" y="187.0" />
+    </edge>
+    <edge source="br.com.fatec.lista1.view.Operations" target="br.com.fatec.lista1.registration.Client">
+      <point x="38.0" y="-153.5" />
+      <point x="190.0" y="1308.0" />
+      <point x="148.17830687830687" y="1308.0" />
+      <point x="148.17830687830687" y="889.0" />
+      <point x="305.4856481481482" y="889.0" />
+      <point x="-85.28571428571428" y="129.5" />
+    </edge>
+    <edge source="br.com.fatec.lista1.registration.Client" target="br.com.fatec.lista1.registration.Historic">
+      <point x="85.28571428571428" y="-129.5" />
+      <point x="476.05707671957674" y="570.0" />
+      <point x="570.7025793650794" y="570.0" />
+      <point x="87.0" y="118.0" />
+    </edge>
+    <edge source="br.com.fatec.lista1.view.Operations" target="br.com.fatec.lista1.registration.Phone">
+      <point x="-38.0" y="-153.5" />
+      <point x="114.0" y="1308.0" />
+      <point x="105.0738095238095" y="1308.0" />
+      <point x="105.0738095238095" y="570.0" />
+      <point x="115.94880952380947" y="570.0" />
+      <point x="-16.375" y="27.0" />
+    </edge>
+    <edge source="br.com.fatec.lista1.registration.Purchase" target="br.com.fatec.lista1.registration.Client">
+      <point x="-70.125" y="117.0" />
+      <point x="367.36064814814813" y="259.0" />
+      <point x="342.7025793650794" y="259.0" />
+      <point x="342.7025793650794" y="540.0" />
+      <point x="390.77136243386246" y="540.0" />
+      <point x="0.0" y="-129.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="148.80555555555543" y="1151.0" />
+  <settings layout="Hierarchic Group" zoom="0.8693744164332398" x="463.64356365812785" y="311.8478144130599" />
   <SelectedNodes />
   <Categories>
-    <Category>Fields</Category>
     <Category>Properties</Category>
+    <Category>Fields</Category>
     <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
