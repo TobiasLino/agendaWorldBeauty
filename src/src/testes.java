@@ -1,5 +1,7 @@
+//
+//  Tobias Lino 2020.
+//
 import br.com.fatec.lista1.agenda.Agenda;
-import br.com.fatec.lista1.filemanipulation.FileManip;
 import br.com.fatec.lista1.registration.Client;
 import br.com.fatec.lista1.registration.Phone;
 
@@ -8,7 +10,6 @@ import java.io.IOException;
 public class testes {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Agenda a1 = new Agenda();
-        Agenda a2 = new Agenda();
 
         Client cl1 = new Client();
         cl1.setName_("Tobias Lino");
@@ -24,17 +25,23 @@ public class testes {
         cl2.setAge(82);
         cl2.setBirth_("12/02/1938");
 
-        a1.add(cl1);
-        a1.add(cl2);
+        Client cl3 = new Client();
+        cl3.setName_("Ana Paula da Silva Lino");
+        cl3.setGender_("feminino");
+        cl3.setAge(37);
+        cl3.setBirth_("20/01/1982");
 
+        a1.add(cl2);
+        a1.add(cl3);
+        a1.add(cl1);
+        /*
         FileManip fl = new FileManip();
 
         fl.sync(a1);
 
         fl.Read(a2);
+         */
 
-        a1.print();
-        a1.sort();
         a1.print();
     }
 }

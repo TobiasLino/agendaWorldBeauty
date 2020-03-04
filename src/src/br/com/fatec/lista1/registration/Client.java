@@ -1,3 +1,6 @@
+//
+//  Tobias Lino 2020.
+//
 package br.com.fatec.lista1.registration;
 
 import java.io.Serializable;
@@ -11,10 +14,10 @@ public class Client implements Serializable {
     private Historic historic_;
 
     public Client() {
-        name_ = "null";
+        name_ = "";
         age_ = 0;
-        birth_ = "null";
-        gender_ = "null";
+        birth_ = "";
+        gender_ = "";
         phone_ = null;
         historic_ = null;
     }
@@ -89,7 +92,7 @@ public class Client implements Serializable {
     }
 
     public void setGender_(String gender_) {
-        this.gender_ = gender_;
+        this.gender_ = gender_.toLowerCase();
     }
 
     public Phone getPhone_() {
