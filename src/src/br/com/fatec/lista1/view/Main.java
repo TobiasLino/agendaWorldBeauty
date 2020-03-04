@@ -4,13 +4,15 @@
 package br.com.fatec.lista1.view;
 
 import br.com.fatec.lista1.agenda.Agenda;
+import org.json.JSONException;
+
 /*
 Inicia o sistema.
 Cria um objeto para manipulação dos menus disponíveis.
 Cria uma agenda para modificação dos clientes.
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSONException {
         Menus menu = new Menus();
         Agenda agenda_ = new Agenda();
         while (true) {

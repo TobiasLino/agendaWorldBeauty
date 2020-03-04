@@ -35,17 +35,11 @@ public class Client implements Serializable {
     }
 
     public void Print() {
-        String var = "Nome: " + name_ + "\n";
-        if (!birth_.equals("null")) {
-            var += "Nascimento: " + birth_ + "\n";
-        }
-        if (!gender_.equals("null ")) {
-            var += "Gênero: " + gender_ + "\n";
-        }
         if (phone_ != null) {
-            var += "Telefone: " + phone_.getNumber_();
+            System.out.printf("%30s|%10s|%12s|%17s\n",name_, birth_, gender_, phone_.getNumber_());
+        } else {
+            System.out.printf("%30s|%10s|%12s|%17s\n",name_, birth_, gender_, "");
         }
-        System.out.println(var);
     }
 
     public String infos() {

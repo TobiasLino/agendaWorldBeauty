@@ -31,16 +31,7 @@ public class testes {
         cl3.setAge(37);
         cl3.setBirth_("20/01/1982");
 
-        a1.add(cl2);
-        a1.add(cl3);
-        a1.add(cl1);
-        /*
-        FileManip fl = new FileManip();
 
-        fl.sync(a1);
-
-        fl.Read(a2);
-         */
 
         a1.print();
     }

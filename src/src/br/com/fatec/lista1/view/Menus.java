@@ -5,6 +5,7 @@ package br.com.fatec.lista1.view;
 
 import br.com.fatec.lista1.agenda.Agenda;
 import br.com.fatec.lista1.registration.Client;
+import org.json.JSONException;
 
 import java.util.Scanner;
 
@@ -24,7 +25,8 @@ public class Menus {
                 + "\t6. Sair.\n";
         System.out.print(n + "Qual sua opção? : ");
         opcao = Integer.parseInt(scan.nextLine());
-        return opcao;
+        if (opcao > 0 && opcao <= 6) return opcao;
+        else return 0;
     }
     // Menu para listagem de clientes.
     public int ListClientMenu() {
@@ -38,7 +40,8 @@ public class Menus {
                 + "\t5. Sair.\n";
         System.out.print(n + "Qual sua opção? :");
         opcao = Integer.parseInt(scan.nextLine());
-        return opcao;
+        if (opcao > 0 && opcao <= 5) return opcao;
+        else return 0;
     }
     // Chamada da impressão das listas.
     public void ListClients(Agenda agenda) {
@@ -67,17 +70,18 @@ public class Menus {
                 + "\t6.Confirmar.\n";
         System.out.print(n + "Qual sua opção? ");
         opcao = Integer.parseInt(scan.nextLine());
-        return opcao;
+        if (opcao > 0 && opcao <= 6) return opcao;
+        else return 0;
     }
     // Cria o cliente a ser inserido.
-    public void InsertClient(Agenda agenda) {
+    public void InsertClient(Agenda agenda) throws JSONException {
         Client novoCliente = new Client();
         editaClienteInfos(agenda, novoCliente, true);
     }
     // Imprime as informações do cliente temporário.
     public void tempClientInfos(Client client) {
-        System.out.println();
-        System.out.println("Dados do cliente até agora: ");
+        System.out.print("Dados do cliente até agora: ");
+        op.title();
         client.Print();
     }
     // Confirma se o nome do cliente foi digitado
@@ -92,7 +96,7 @@ public class Menus {
     }
     // Edita os dados do cliente selecionado, true se for adiciona-lo à agenda
     // e false se apenas for editar.
-    public void editaClienteInfos(Agenda agenda, Client cliente, boolean novoCliente) {
+    public void editaClienteInfos(Agenda agenda, Client cliente, boolean novoCliente) throws JSONException {
         int option = 0;
         while (option != 1) {
             tempClientInfos(cliente);
@@ -107,6 +111,8 @@ public class Menus {
                     if (confirmaNome(cliente)) {        // Confirma se o nome do cliente foi inserido.
                         if (confirmOption()) {
                             if (novoCliente) op.adicionaCliente(agenda, cliente);  // Se for adicionar ou apenas editar.
+                            // se não, sincroniza com o arquivo
+                            agenda.sync();
                             option = 1;
                             break;
                         } else {
@@ -122,7 +128,7 @@ public class Menus {
         }
     }
     // Edita as informações do cliente
-    public void editaCliente(Agenda agenda) {
+    public void editaCliente(Agenda agenda) throws JSONException {
         String name = op.getOption("Digite o nome do cliente: ");
         Client toEdit = agenda.findIt(name);
         if (op.verificaCliente(toEdit, agenda)) editaClienteInfos(agenda, toEdit, false);

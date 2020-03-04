@@ -6,20 +6,22 @@ package br.com.fatec.lista1.view;
 import br.com.fatec.lista1.agenda.Agenda;
 import br.com.fatec.lista1.registration.Client;
 import br.com.fatec.lista1.registration.Phone;
+import org.json.JSONException;
 
 import java.util.Scanner;
 
 public class Operations {
-
+    // retorna a opção digitada pelo usuário mediante uma mensagem.
     public String getOption(String msg) {
         System.out.print(msg);
         Scanner s = new Scanner(System.in);
         return s.nextLine();
     }
     // Adiciona cliente diretamente na agenda
-    public void adicionaCliente(Agenda agenda, Client cliente) {
+    public void adicionaCliente(Agenda agenda, Client cliente) throws JSONException {
         agenda.add(cliente);
         System.out.println("Adiciona Cliente");
+        agenda.sync();
     }
 
     public boolean verificaCliente(Client client, Agenda agenda) {
@@ -78,6 +80,7 @@ public class Operations {
             System.out.println("Nenhum cliente Cadastrado");
         } else {
             System.out.println("\n\nListando todos os clientes Cadastrados.");
+            title();
             agenda.print();
         }
         System.out.println();
@@ -85,19 +88,26 @@ public class Operations {
 
     public void listaClientesMale(Agenda agenda) {
         System.out.println("\n\nListando todos os Clientes Masculinos.");
+        title();
         agenda.printMale();
         System.out.println();
     }
 
     public void listaClientesFemale(Agenda agenda) {
         System.out.println("\n\nListando todos os Clientes Femininos.");
+        title();
         agenda.printFemale();
         System.out.println();
     }
 
     public void listaClientesNotBinaries(Agenda agenda) {
         System.out.println("\n\nListando todos os Clientes de gênero não binário.");
+        title();
         agenda.printNotBinaries();
+    }
+    // Define o titulo da tabela de clientes
+    public void title() {
+        System.out.printf("\n%30s|%10s|%12s|%17s\n","Nome", "Birth", "Gender", "Phone");
     }
 }
 
