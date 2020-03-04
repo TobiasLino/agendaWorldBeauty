@@ -4,19 +4,31 @@
 package br.com.fatec.lista1.agenda;
 
 import br.com.fatec.lista1.registration.Client;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
+import br.com.fatec.lista1.registration.Phone;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.util.*;
+import java.io.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Agenda {
     // Vetor onde cada elemento contém uma lista com clientes cujo
     // nome começa com a letra correspondente ao seu índice
     // (A = 0, B = 1, ..., Z = 25) com +1 de segurança.
     protected List<Client>[] agenda_;
+    // Array para salvar no arquivo json.
+    JSONObject jsonObject = null;
+    JSONArray jsonArray = null;
+    private final String file_name = "agenda.json";
     // Define um tamanho fixo do vetor e inicializa cada elemento.
-    public Agenda() {
+    public Agenda() throws FileNotFoundException {
         int ALPHABETLEN = 26;
         agenda_ = new LinkedList[ALPHABETLEN + 1];
         for (int i = 0; i < ALPHABETLEN + 1; ++i) {
@@ -129,19 +141,28 @@ public class Agenda {
         char var = str.charAt(0);
         return var - 65;
     }
-    // Salvar no arquivo
-    public void sync() throws JSONException {
-        JSONArray array = new JSONArray();
-        for (List<Client> clients : agenda_) {
-            for (Client client : clients) {
-                JSONObject jso = new JSONObject();
-                putIntoJSON(jso, client);
-                array.put(jso);
+    // Salvar no arquivo.
+    public void sync() throws IOException {
+        try {
+            FileWriter arquivoJson = new FileWriter(file_name);
+
+            jsonArray = new JSONArray();
+            for (List<Client> clients : agenda_) {
+                for (Client client : clients) {
+                    JSONObject obj = new JSONObject();
+                    putIntoJSON(obj, client);
+                    jsonArray.add(obj);
+                }
             }
+
+            arquivoJson.write(jsonArray.toJSONString());
+            arquivoJson.flush();
+        } catch (IOException e) {
+            Logger.getLogger(Agenda.class.getName()).log(Level.SEVERE, null, e);
         }
     }
     // Insere os dados do cliente no jsonObj.
-    public void putIntoJSON(JSONObject jsonObject, Client client) throws JSONException {
+    private void putIntoJSON(JSONObject jsonObject, Client client) {
         jsonObject.put("name", client.getName_());
         jsonObject.put("age", client.getAge());
         jsonObject.put("birth", client.getBirth_());
@@ -151,5 +172,32 @@ public class Agenda {
         } else {
             jsonObject.put("phone", "");
         }
+    }
+    // Recupera os dados do arquivo.
+    public void recover() throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        try {
+            FileReader arquivoJson = new FileReader(file_name);
+
+            Object obj = jsonParser.parse(arquivoJson);
+
+            jsonArray = (JSONArray) obj;
+
+            jsonArray.forEach(Client -> getJson ((JSONObject) Client));
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void getJson(JSONObject jsonObject) {
+        Client tmp = new Client();
+        tmp.setName_(jsonObject.get("name").toString());
+        tmp.setAge(Integer.parseInt(jsonObject.get("age").toString()));
+        tmp.setGender_(jsonObject.get("gender").toString());
+        tmp.setBirth_(jsonObject.get("birth").toString());
+        Phone tel = new Phone(jsonObject.get("phone").toString());
+        tmp.setPhone_(tel);
+
+        add(tmp);
     }
 }

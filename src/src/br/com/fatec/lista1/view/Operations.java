@@ -6,8 +6,8 @@ package br.com.fatec.lista1.view;
 import br.com.fatec.lista1.agenda.Agenda;
 import br.com.fatec.lista1.registration.Client;
 import br.com.fatec.lista1.registration.Phone;
-import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Operations {
@@ -18,7 +18,7 @@ public class Operations {
         return s.nextLine();
     }
     // Adiciona cliente diretamente na agenda
-    public void adicionaCliente(Agenda agenda, Client cliente) throws JSONException {
+    public void adicionaCliente(Agenda agenda, Client cliente) throws IOException {
         agenda.add(cliente);
         System.out.println("Adiciona Cliente");
         agenda.sync();

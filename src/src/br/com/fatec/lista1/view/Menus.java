@@ -5,8 +5,8 @@ package br.com.fatec.lista1.view;
 
 import br.com.fatec.lista1.agenda.Agenda;
 import br.com.fatec.lista1.registration.Client;
-import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menus {
@@ -74,7 +74,7 @@ public class Menus {
         else return 0;
     }
     // Cria o cliente a ser inserido.
-    public void InsertClient(Agenda agenda) throws JSONException {
+    public void InsertClient(Agenda agenda) throws IOException {
         Client novoCliente = new Client();
         editaClienteInfos(agenda, novoCliente, true);
     }
@@ -96,7 +96,7 @@ public class Menus {
     }
     // Edita os dados do cliente selecionado, true se for adiciona-lo à agenda
     // e false se apenas for editar.
-    public void editaClienteInfos(Agenda agenda, Client cliente, boolean novoCliente) throws JSONException {
+    public void editaClienteInfos(Agenda agenda, Client cliente, boolean novoCliente) throws IOException {
         int option = 0;
         while (option != 1) {
             tempClientInfos(cliente);
@@ -128,7 +128,7 @@ public class Menus {
         }
     }
     // Edita as informações do cliente
-    public void editaCliente(Agenda agenda) throws JSONException {
+    public void editaCliente(Agenda agenda) throws IOException {
         String name = op.getOption("Digite o nome do cliente: ");
         Client toEdit = agenda.findIt(name);
         if (op.verificaCliente(toEdit, agenda)) editaClienteInfos(agenda, toEdit, false);
