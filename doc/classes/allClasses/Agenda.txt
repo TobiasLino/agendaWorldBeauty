@@ -1,54 +1,57 @@
+//
+//  Tobias Lino 2020.
+//
 Classe Principal que mantém todos os clientes numa lista alfabética.
 
 public class Agenda {
-    // Consiste na utilização de um vetor de 27 elementos (total de letras do alfabéto + 1)
-    // cada qual é uma lista para Cliente cujo nomes começam com a letra correspondente ao índice.
-    private List<Client>[] agenda_ = new LinkedList[27];
+    // Vetor onde cada elemento contém uma lista com clientes cujo
+    // nome começa com a letra correspondente ao seu índice
+    // (A = 0, B = 1, ..., Z = 25) com +1 de segurança.
+    protected List<Client>[] agenda_;
 
-    // O construtor default instância cada elemento do vetor como sendo do tipo LinkedList;
+    // Define um tamanho fixo do vetor e inicializa cada elemento.
     public Agenda();
 
-    // Busca de cliente por meio do nome.
+    // Retorna o cliente cujo nome seja igual ao parâmetro passado.
     public Client findIt(String name);
 
-    // Adiciona um novo cliente.
+    // Adiciona o cliente na lista correspondente. Por segurança,
+    // a lista é reordenada evitando conflitos de nomes parecidos.
     public void add(Client cliente);
 
-    // Remove o cliente forncendo o seu nome.
+    // Remove um cliente pelo nome.
     public void remove(String name);
 
-    // Retorna quantos clientes esão na lista
-    public int Size();
+    // Remove um cliente passando o objeto.
+    public void remove(Client cliente);
 
-    // Imprime todos os clientes.
-    public void Print();
+    // Retorna a quantidade de elementos presentes na agenda.
+    public int size();
 
-    // 
-    // Foi identificado que para se obter o índice de uma letra no alfabéto,
-    // basta subtrair 65 do valor da char, assim: 'A' == 0, 'B' == 1.
-    // Exemplo:
-    //		String name = "José";
-    //		int index = getIndex(name);	// pega a primeira letra de name
-    //		print(index);	// o resultado é 9
+    // Imprime todos os clientes da lista no terminal.
+    public void print();
+
+    // Retorna a lista de clientes correspondente ao indíce (inicial
+    // do nome do cliente).
+    public List<Client> getClients(int index);
+
+    // Imprime apenas Clientes definidos como do gênero masculino.
+    public void printMale();
+
+    // Imprime apenas clientes definidos como do gênero feminino.
+    public void printFemale();
+
+    // Imprime apenas clientes definidos como de um gênero não binário.
+    public void printNotBinaries();
+
+    // Booleano que verifica se a agenda contém o cliente.
+    public boolean contains(Client cliente);
+
+    // Verifica se a agenda contém o cliente, pelo nome.
+    public boolean contains(String clientName);
+
+    // Retorna o índice correspondente a letra inicial da string passada
+    // como parâmetro.
     public int getIndex(String str);
 }
 
-
-Exemplo de implementação:
-
-	Agenda a = new Agenda();
-	Date dat = new Date();
-	Client cl1 = new Client("Tobias", dat);
-	Client cl2 = new Client("Tania", dat);
-	Client cl3 = new Client("José", dat, "Masculino");
-	Client cl4 = new Client("Jana", dat, "Faminino");
-	Client cl5 = new Client("Amanda", dat, "Feminino");
-
-	a.add(cl1);
-	a.add(cl2);
-	a.add(cl3);
-	a.add(cl4);
-	a.add(cl5);
-
-	a.Print();       // Imprime todos os clientes
-        	         // em ordem alfabética
