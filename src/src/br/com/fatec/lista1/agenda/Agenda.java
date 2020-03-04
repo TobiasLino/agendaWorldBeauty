@@ -4,9 +4,11 @@
 package br.com.fatec.lista1.agenda;
 
 import br.com.fatec.lista1.registration.Client;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.util.*;
-
 
 public class Agenda {
     // Vetor onde cada elemento contém uma lista com clientes cujo
@@ -89,7 +91,6 @@ public class Agenda {
             for (Client client : clientes) {
                 if (client.getGender_().charAt(0) == 'm')
                     client.Print();
-                System.out.println();
             }
         }
     }
@@ -99,7 +100,6 @@ public class Agenda {
             for (Client client : clientes) {
                 if (client.getGender_().charAt(0) == 'f')
                     client.Print();
-                System.out.println();
             }
         }
     }
@@ -128,5 +128,28 @@ public class Agenda {
     public int getIndex(String str) {
         char var = str.charAt(0);
         return var - 65;
+    }
+    // Salvar no arquivo
+    public void sync() throws JSONException {
+        JSONArray array = new JSONArray();
+        for (List<Client> clients : agenda_) {
+            for (Client client : clients) {
+                JSONObject jso = new JSONObject();
+                putIntoJSON(jso, client);
+                array.put(jso);
+            }
+        }
+    }
+    // Insere os dados do cliente no jsonObj.
+    public void putIntoJSON(JSONObject jsonObject, Client client) throws JSONException {
+        jsonObject.put("name", client.getName_());
+        jsonObject.put("age", client.getAge());
+        jsonObject.put("birth", client.getBirth_());
+        jsonObject.put("gender", client.getGender_());
+        if (client.getPhone_() != null) {
+            jsonObject.put("phone", client.getPhone_().getNumber_());
+        } else {
+            jsonObject.put("phone", "");
+        }
     }
 }
