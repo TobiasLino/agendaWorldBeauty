@@ -1,0 +1,22 @@
+Primeira etapa do Desenvolvimento do projeto.
+
+1 Empatia.
+    Muitas empresas ainda não possuem um programa de cadastro de clientes. Esse tipo de programa promove uma aproximação entre cliente/empresa.
+    Quando a empresa não possui o cadastro de seus clientes, a mesma não consegue visualizar qual é o seu público, o que pode ser um grande impecílio para estratégias de marketing.
+    Se a empresa não visualiza o seu público e não mantém uma afinidade com o mesmo, descobrir qual tipo de produto/serviço seu público mais consome se torna mauito mais difícil.
+    O objetivo deste projeto, então, é desenvolver uma agenda de clientes para uma empesa de estética, chamada Grupo World Beauty (GWB).
+2 Definição.
+    A empresa não consegue manter um cadastro de clientes, assim não consegue ter uma visualização de qual o seu público.
+    Essa visualização inclui saber qual a faixa etária de seu público e quais produtos/serviços ele mais consome.
+3 Ideias.
+    1 Utilizar um vetor de listas para organizar os dados dos clientes em ordem alfabética.
+        1.1 Cada elemento do vetor será representado por uma letra do alfabéto, assim as listas conterão apenas clientes cujos nome comessem com a mesma letra do seu respectivo índice.
+    2 Salvar os dados em um arquivo txt ou json.
+    3 O sistema não precisa ter interface, assim basta funcionar em linha de comando.
+    4 Fazer o uso de sobrecarga de operadores para que a visualização e interpretação do código seja mais clara.
+    5 Código estruturado seguindo as indicações do Google Style Sheet.
+4 Prototipação.
+    O protótipo desenvolvido se encontra no arquivo bpmn.png da pasta "proccess".
+5 Testes
+    Os testes foram realizados em um programa escrito em linguagem Java, onde pode-se verificar a praticidade da aplicação.
+    O diretório do programa se encontra em: https://github.com/TobiasLino/agendaWorldBeauty
