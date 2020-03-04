@@ -4,7 +4,10 @@
 package br.com.fatec.lista1.view;
 
 import br.com.fatec.lista1.agenda.Agenda;
-import org.json.JSONException;
+import org.json.simple.parser.ParseException;
+
+import java.io.File;
+import java.io.IOException;
 
 /*
 Inicia o sistema.
@@ -12,9 +15,15 @@ Cria um objeto para manipulação dos menus disponíveis.
 Cria uma agenda para modificação dos clientes.
  */
 public class Main {
-    public static void main(String[] args) throws JSONException {
+    public static void main(String[] args) throws IOException, ParseException {
         Menus menu = new Menus();
         Agenda agenda_ = new Agenda();
+        File f = new File("agenda.json");
+        if (f.exists()) {
+            agenda_.recover();
+        } else {
+            f.createNewFile();
+        }
         while (true) {
             switch (menu.mainMenu()) {
                 case 1 : menu.InsertClient(agenda_); break;         // Insere um novo cliente
