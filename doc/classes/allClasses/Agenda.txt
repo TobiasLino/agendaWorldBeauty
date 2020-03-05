@@ -53,5 +53,11 @@ public class Agenda {
     // Retorna o índice correspondente a letra inicial da string passada
     // como parâmetro.
     public int getIndex(String str);
+
+    // Recupera os dados do arquivo.
+    public void recover() throws IOException, ParseException;
+
+    // Passa o conteúdo do Json para a agenda.
+    private void getJson(JSONObject jsonObject);
 }
 
