@@ -1,16 +1,17 @@
 //
 //  Tobias Lino 2020.
 //
-package br.com.fatec.lista1.view;
+package br.com.fatec.lista1.controller;
 
-import br.com.fatec.lista1.agenda.Agenda;
-import br.com.fatec.lista1.registration.Client;
-import br.com.fatec.lista1.registration.Phone;
+import br.com.fatec.lista1.model.Agenda;
+import br.com.fatec.lista1.model.Client;
+import br.com.fatec.lista1.model.Phone;
+import br.com.fatec.lista1.model.Report;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Operations {
+public class Controller {
     // retorna a opção digitada pelo usuário mediante uma mensagem.
     public String getOption(String msg) {
         System.out.print(msg);
@@ -45,6 +46,11 @@ public class Operations {
     public void insertName(Client cliente) {
         String nam = getOption("Insira o nome: ");
         cliente.setName_(nam);
+    }
+
+    public void insertAge(Client client) {
+        int age = Integer.parseInt(getOption("Insira a idade: "));
+        client.setAge(age);
     }
 
     public void insertBirth(Client cliente) {
@@ -107,7 +113,17 @@ public class Operations {
     }
     // Define o titulo da tabela de clientes
     public void title() {
-        System.out.printf("\n%30s|%10s|%12s|%17s\n","Nome", "Birth", "Gender", "Phone");
+        System.out.printf("\n%40s|%3s|%10s|%12s|%17s\n","Nome", "Age", "Birth", "Gender", "Phone");
+    }
+    // Imprime relatório.
+    public void impRelatorio(Agenda agenda) {
+        Report rep = new Report(agenda);
+        rep.printReport();
+    }
+    // Salva o arquivo com o relatório
+    public void saveRelatorio(Agenda agenda) throws IOException {
+        Report rep = new Report(agenda);
+        rep.getReportFile();
     }
 }
 

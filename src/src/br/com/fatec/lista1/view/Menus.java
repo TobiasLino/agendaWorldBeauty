@@ -3,15 +3,16 @@
 //
 package br.com.fatec.lista1.view;
 
-import br.com.fatec.lista1.agenda.Agenda;
-import br.com.fatec.lista1.registration.Client;
+import br.com.fatec.lista1.controller.Controller;
+import br.com.fatec.lista1.model.Agenda;
+import br.com.fatec.lista1.model.Client;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Menus {
     // Operações de inserção e listagem na agenda
-    private Operations op = new Operations();
+    private Controller op = new Controller();
     // Menu principal, chamado na classe Main.
     public int mainMenu() {
         int opcao;
@@ -63,14 +64,15 @@ public class Menus {
         Scanner scan = new Scanner(System.in);
         String n = "\nInsira a opção correspondente:\n"
                 + "\t1. Inserir Nome.\n"
-                + "\t2. Inserir Data de Nascimento.\n"
-                + "\t3. Inserir Gênero.\n"
-                + "\t4. Inserir Telefone.\n"
-                + "\t5.Cancelar.\n"
-                + "\t6.Confirmar.\n";
+                + "\t2. Inserir Idade.\n"
+                + "\t3. Inserir Data de Nascimento.\n"
+                + "\t4. Inserir Gênero.\n"
+                + "\t5. Inserir Telefone.\n"
+                + "\t6.Cancelar.\n"
+                + "\t7.Confirmar.\n";
         System.out.print(n + "Qual sua opção? ");
         opcao = Integer.parseInt(scan.nextLine());
-        if (opcao > 0 && opcao <= 6) return opcao;
+        if (opcao > 0 && opcao <= 7) return opcao;
         else return 0;
     }
     // Cria o cliente a ser inserido.
@@ -103,11 +105,12 @@ public class Menus {
             int opcao = insertClientOptions();
             switch (opcao) {
                 case 1 : op.insertName(cliente); break;
-                case 2 : op.insertBirth(cliente); break;
-                case 3 : op.insertGender(cliente); break;
-                case 4 : op.insertPhone(cliente); break;
-                case 5 : return;
-                case 6 :
+                case 2 : op.insertAge(cliente); break;
+                case 3 : op.insertBirth(cliente); break;
+                case 4 : op.insertGender(cliente); break;
+                case 5 : op.insertPhone(cliente); break;
+                case 6 : return;
+                case 7 :
                     if (confirmaNome(cliente)) {        // Confirma se o nome do cliente foi inserido.
                         if (confirmOption()) {
                             if (novoCliente) op.adicionaCliente(agenda, cliente);  // Se for adicionar ou apenas editar.
@@ -134,7 +137,7 @@ public class Menus {
         if (op.verificaCliente(toEdit, agenda)) editaClienteInfos(agenda, toEdit, false);
     }
     // Remove o cliente selecionado.
-    public void removeCliente(Agenda agenda) {
+    public void removeCliente(Agenda agenda) throws IOException {
         String name = op.getOption("Digite o nome do cliente: ");
         Client toRemove = agenda.findIt(name);
         if (op.verificaCliente(toRemove, agenda)) {
@@ -143,5 +146,32 @@ public class Menus {
                 agenda.remove(lx);
             }
         }
+        agenda.sync();
+    }
+
+    private int relOptions() {
+        System.out.print("Insira a opção desejada:\n"
+                + "\t1. Imprimir relatório.\n"
+                + "\t2. Salvar arquivo.\n"
+                + "\t3. Voltar.");
+        int opt = Integer.parseInt(op.getOption("Digite a sua opção: "));
+        if (opt > 0 && opt < 4) {
+            return opt;
+        } else {
+            return 0;
+        }
+    }
+
+    public void geraRelatorio(Agenda agenda) throws IOException {
+        int n = 0;
+        do {
+            n = relOptions();
+            switch (n) {
+                case 1: op.impRelatorio(agenda); break;
+                case 2: op.saveRelatorio(agenda); break;
+                case 3: return;
+                default: System.out.println("Insira uma opção válida.");
+            }
+        } while (n != 4);
     }
 }

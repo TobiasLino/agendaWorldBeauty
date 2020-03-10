@@ -1,9 +1,10 @@
 //
 //  Tobias Lino 2020.
 //
-package br.com.fatec.lista1.view;
+package br.com.fatec.lista1.app;
 
-import br.com.fatec.lista1.agenda.Agenda;
+import br.com.fatec.lista1.model.Agenda;
+import br.com.fatec.lista1.view.Menus;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -30,6 +31,7 @@ public class Main {
                 case 2 : menu.ListClients(agenda_); break;        // Opções de impressão
                 case 3 : menu.removeCliente(agenda_); break;
                 case 4 : menu.editaCliente(agenda_); break;
+                case 5 : menu.geraRelatorio(agenda_); break;
                 case 6 : return;
                 default:
                     System.out.println("Digite uma opção válida.");

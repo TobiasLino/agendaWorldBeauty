@@ -1,4 +1,4 @@
-package br.com.fatec.lista1.registration;
+package br.com.fatec.lista1.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,18 +23,18 @@ public class Purchase {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String printed = "Compra realizada por: " + client_.getName_()
                 + "\nData: " +  df.format(date_);
-        if (products_ != "") {
+        if (!products_.equals("")) {
             printed += "\nProdutos: " + products_;
         }
-        if (services_ != "") {
+        if (!services_.equals("")) {
             printed += "\nServiços: " + services_;
         }
         printed += "\nMétodo de pagamento: " + paymentMethod_;
         System.out.println(printed);
     }
 
-    public Date getDate_() {
-        return date_;
+    public String getDate_() {
+        return date_.toString();
     }
 
     public void setDate_(Date date_) {

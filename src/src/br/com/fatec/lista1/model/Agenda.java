@@ -1,10 +1,8 @@
 //
 //  Tobias Lino 2020.
 //
-package br.com.fatec.lista1.agenda;
+package br.com.fatec.lista1.model;
 
-import br.com.fatec.lista1.registration.Client;
-import br.com.fatec.lista1.registration.Phone;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,7 +51,7 @@ public class Agenda {
         agenda_[i].sort(Comparator.comparing(Client::getName_));
     }
     // Remove um cliente pelo nome.
-    public void remove(String name) {
+    public void remove(String name) throws IOException {
         int index = getIndex(name);
         int valor;
         Client lixo = new Client();
@@ -65,7 +63,7 @@ public class Agenda {
         }
     }
     // Remove um cliente passando o objeto.
-    public void remove(Client cliente) {
+    public void remove(Client cliente) throws IOException {
         int index = getIndex(cliente.getName_());
         Iterator<Client> i = agenda_[index].iterator();
         if (i.hasNext()) {
@@ -138,14 +136,17 @@ public class Agenda {
     // Retorna o índice correspondente a letra inicial da string passada
     // como parâmetro.
     public int getIndex(String str) {
-        char var = str.charAt(0);
+        char var = str.toUpperCase().charAt(0);
         return var - 65;
     }
     // Salvar no arquivo.
     public void sync() throws IOException {
+        File f = new File(file_name);
+        f.delete();
         try {
+            // File file = new File(file_name);
+            //file.createNewFile();
             FileWriter arquivoJson = new FileWriter(file_name);
-
             jsonArray = new JSONArray();
             for (List<Client> clients : agenda_) {
                 for (Client client : clients) {
@@ -154,7 +155,6 @@ public class Agenda {
                     jsonArray.add(obj);
                 }
             }
-
             arquivoJson.write(jsonArray.toJSONString());
             arquivoJson.flush();
         } catch (IOException e) {
@@ -188,7 +188,7 @@ public class Agenda {
 
         }
     }
-
+    // Passa o conteúdo do Json para a agenda.
     private void getJson(JSONObject jsonObject) {
         Client tmp = new Client();
         tmp.setName_(jsonObject.get("name").toString());

@@ -1,6 +1,5 @@
-package br.com.fatec.lista1.registration;
+package br.com.fatec.lista1.model;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,17 +9,14 @@ public class Historic {
     private List<Purchase> allPurchases_;
 
     public Historic() {
-        firstPurchase_ = null;
-        lastPurchase_ = null;
+        firstPurchase_ = lastPurchase_ = null;
         allPurchases_ = new LinkedList<Purchase>();
-        allPurchases_.add(firstPurchase_);
     }
 
     public Historic(Purchase primeiraCompra) {
-        firstPurchase_ = primeiraCompra;
-        lastPurchase_ = primeiraCompra;
+        firstPurchase_ = lastPurchase_ = primeiraCompra;
         allPurchases_ = new LinkedList<Purchase>();
-        allPurchases_.add(firstPurchase_);
+        allPurchases_.add(primeiraCompra);
     }
 
     public void AddFirstPurchase(Purchase primeraCompra) {

@@ -1,4 +1,4 @@
-package br.com.fatec.lista1.registration;
+package br.com.fatec.lista1.model;
 
 import java.io.Serializable;
 

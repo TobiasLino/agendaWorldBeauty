@@ -1,7 +1,7 @@
 //
 //  Tobias Lino 2020.
 //
-package br.com.fatec.lista1.registration;
+package br.com.fatec.lista1.model;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class Client implements Serializable {
 
     public Client() {
         name_ = "";
-        age_ = 0;
+        age_ = 1;
         birth_ = "";
         gender_ = "";
         phone_ = null;
@@ -36,9 +36,9 @@ public class Client implements Serializable {
 
     public void Print() {
         if (phone_ != null) {
-            System.out.printf("%30s|%10s|%12s|%17s\n",name_, birth_, gender_, phone_.getNumber_());
+            System.out.printf("%40s|%3d|%10s|%12s|%17s\n",name_, age_, birth_, gender_, phone_.getNumber_());
         } else {
-            System.out.printf("%30s|%10s|%12s|%17s\n",name_, birth_, gender_, "");
+            System.out.printf("%40s|%3d|%10s|%12s|%17s\n",name_, age_, birth_, gender_, "");
         }
     }
 
