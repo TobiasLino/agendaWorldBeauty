@@ -22,3 +22,5 @@ Torna-se difícil identificar qual o tipo de público que frequenta suas unidade
 A empresa também não consegue identificar quais produtos seus clientes mais compram.
 A intimidade da rede com os clientes está se tornando mais distante.
 
+## Arquitetura
+![arquitetura](https://user-images.githubusercontent.com/50988433/76132676-e6600c00-5ff2-11ea-8efb-321078e6e431.png)
