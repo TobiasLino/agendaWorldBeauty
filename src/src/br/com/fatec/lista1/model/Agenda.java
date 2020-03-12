@@ -3,6 +3,7 @@
 //
 package br.com.fatec.lista1.model;
 
+import br.com.fatec.lista1.controller.Controller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,6 +27,7 @@ public class Agenda {
     JSONArray jsonArray = null;
     private final String file_name = "agenda.json";
     // Define um tamanho fixo do vetor e inicializa cada elemento.
+    @SuppressWarnings("unchecked")
     public Agenda() throws FileNotFoundException {
         int ALPHABETLEN = 26;
         agenda_ = new LinkedList[ALPHABETLEN + 1];
@@ -140,9 +142,11 @@ public class Agenda {
         return var - 65;
     }
     // Salvar no arquivo.
+    @SuppressWarnings("unchecked")
     public void sync() throws IOException {
+        Controller ctrl = new Controller();
         File f = new File(file_name);
-        f.delete();
+        if (!f.delete())  ctrl.err("Erro ao deletar", false);
         try {
             // File file = new File(file_name);
             //file.createNewFile();
@@ -162,6 +166,7 @@ public class Agenda {
         }
     }
     // Insere os dados do cliente no jsonObj.
+    @SuppressWarnings("unchecked")
     private void putIntoJSON(JSONObject jsonObject, Client client) {
         jsonObject.put("name", client.getName_());
         jsonObject.put("age", client.getAge());
@@ -174,18 +179,18 @@ public class Agenda {
         }
     }
     // Recupera os dados do arquivo.
+    @SuppressWarnings("unchecked")
     public void recover() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         try {
             FileReader arquivoJson = new FileReader(file_name);
-
             Object obj = jsonParser.parse(arquivoJson);
-
-            jsonArray = (JSONArray) obj;
-
-            jsonArray.forEach(Client -> getJson ((JSONObject) Client));
+            if (obj instanceof JSONArray) {
+                jsonArray = (JSONArray) obj;
+                jsonArray.forEach(Client -> getJson ((JSONObject) Client));
+            }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
     // Passa o conteúdo do Json para a agenda.

@@ -41,7 +41,7 @@ public class Client implements Serializable {
             System.out.printf("%40s|%3d|%10s|%12s|%17s\n",name_, age_, birth_, gender_, "");
         }
     }
-
+/*
     public String infos() {
         String var = "Nome: " + name_ + "\n";
         if (!birth_.equals("null")) {
@@ -56,6 +56,7 @@ public class Client implements Serializable {
         var += "\n";
         return var;
     }
+ */
 
     public String getName_() {
         return name_;
@@ -103,9 +104,5 @@ public class Client implements Serializable {
 
     public void setHistoric_(Historic historic_) {
         this.historic_ = historic_;
-    }
-
-    public boolean isEqual(Client cl) {
-        return this.name_.equals(cl.name_);
     }
 }

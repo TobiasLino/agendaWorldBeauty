@@ -1,0 +1,6 @@
+Gerando relatório para o dia: Tue Mar 10 19:48:33 BRT 2020
+Total de Clientes cadastrados: 3
+Idade média de todo o público da unidade: 18
+Idade média do público masculino: 18
+Idade média do público feminino : 37
+Idade média do público de gênero não binário: 0

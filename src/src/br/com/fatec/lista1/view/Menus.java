@@ -8,41 +8,40 @@ import br.com.fatec.lista1.model.Agenda;
 import br.com.fatec.lista1.model.Client;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Menus {
     // Operações de inserção e listagem na agenda
     private Controller op = new Controller();
     // Menu principal, chamado na classe Main.
     public int mainMenu() {
-        int opcao;
-        Scanner scan = new Scanner(System.in);
-        String n = "\nEscolha a opção desejada:\n"
+        System.out.print("\nEscolha a opção desejada:\n"
                 + "\t1. Cadastrar Cliente.\n"
                 + "\t2. Listar Clientes.\n"
                 + "\t3. Excluir Cliente.\n"
                 + "\t4. Editar Cliente.\n"
                 + "\t5. Gerar Relatório.\n"
-                + "\t6. Sair.\n";
-        System.out.print(n + "Qual sua opção? : ");
-        opcao = Integer.parseInt(scan.nextLine());
-        if (opcao > 0 && opcao <= 6) return opcao;
-        else return 0;
+                + "\t6. Sair.\n");
+        String result = op.getOption("Digite a sua opção: ");
+        int opt = 0;
+        if (!result.equals("")) {
+            opt = Integer.parseInt(result);
+        }
+        return opt;
     }
     // Menu para listagem de clientes.
     public int ListClientMenu() {
-        int opcao;
-        Scanner scan = new Scanner(System.in);
-        String n = "\nEscolha a opção desejada:\n"
+        System.out.print("\nEscolha a opção desejada:\n"
                 + "\t1. Listar todos os clientes.\n"
                 + "\t2. Listar Clientes Masculinos.\n"
                 + "\t3. Listar Clientes Femininos.\n"
                 + "\t4. Listar clientes de gênero não binário\n"
-                + "\t5. Sair.\n";
-        System.out.print(n + "Qual sua opção? :");
-        opcao = Integer.parseInt(scan.nextLine());
-        if (opcao > 0 && opcao <= 5) return opcao;
-        else return 0;
+                + "\t5. Sair.\n");
+        String result = op.getOption("Digite a sua opção: ");
+        int opt = 0;
+        if (!result.equals("")) {
+            opt = Integer.parseInt(result);
+        }
+        return opt;
     }
     // Chamada da impressão das listas.
     public void ListClients(Agenda agenda) {
@@ -59,21 +58,21 @@ public class Menus {
         }
     }
     // Menu de inserção/edição de clientes.
-    public int insertClientOptions() {
-        int opcao = 0;
-        Scanner scan = new Scanner(System.in);
-        String n = "\nInsira a opção correspondente:\n"
+    private int insertClientOptions() {
+        System.out.print("\nInsira a opção correspondente:\n"
                 + "\t1. Inserir Nome.\n"
                 + "\t2. Inserir Idade.\n"
                 + "\t3. Inserir Data de Nascimento.\n"
                 + "\t4. Inserir Gênero.\n"
                 + "\t5. Inserir Telefone.\n"
                 + "\t6.Cancelar.\n"
-                + "\t7.Confirmar.\n";
-        System.out.print(n + "Qual sua opção? ");
-        opcao = Integer.parseInt(scan.nextLine());
-        if (opcao > 0 && opcao <= 7) return opcao;
-        else return 0;
+                + "\t7.Confirmar.\n");
+        String result = op.getOption("Digite a sua opção: ");
+        int opt = 0;
+        if (!result.equals("")) {
+            opt = Integer.parseInt(result);
+        }
+        return opt;
     }
     // Cria o cliente a ser inserido.
     public void InsertClient(Agenda agenda) throws IOException {
@@ -81,7 +80,7 @@ public class Menus {
         editaClienteInfos(agenda, novoCliente, true);
     }
     // Imprime as informações do cliente temporário.
-    public void tempClientInfos(Client client) {
+    private void tempClientInfos(Client client) {
         System.out.print("Dados do cliente até agora: ");
         op.title();
         client.Print();
@@ -148,20 +147,20 @@ public class Menus {
         }
         agenda.sync();
     }
-
+    // Opçoes para visualização a salvamento dos relatórios
     private int relOptions() {
         System.out.print("Insira a opção desejada:\n"
                 + "\t1. Imprimir relatório.\n"
                 + "\t2. Salvar arquivo.\n"
-                + "\t3. Voltar.");
-        int opt = Integer.parseInt(op.getOption("Digite a sua opção: "));
-        if (opt > 0 && opt < 4) {
-            return opt;
-        } else {
-            return 0;
+                + "\t3. Voltar.\n");
+        String result = op.getOption("Digite a sua opção: ");
+        int opt = 0;
+        if (!result.equals("")) {
+            opt = Integer.parseInt(result);
         }
+        return opt;
     }
-
+    // Menu para seleção da opção
     public void geraRelatorio(Agenda agenda) throws IOException {
         int n = 0;
         do {
@@ -172,6 +171,6 @@ public class Menus {
                 case 3: return;
                 default: System.out.println("Insira uma opção válida.");
             }
-        } while (n != 4);
+        } while (true);
     }
 }

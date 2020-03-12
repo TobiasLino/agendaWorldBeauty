@@ -11,7 +11,14 @@ import br.com.fatec.lista1.model.Report;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class Controller {
+    // Controle simples de erros
+    public void err(String msg, boolean fatality) {
+        System.out.println("ERROR: " + msg);
+        if (fatality) { exit(0); }
+    }
     // retorna a opção digitada pelo usuário mediante uma mensagem.
     public String getOption(String msg) {
         System.out.print(msg);
