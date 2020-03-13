@@ -35,7 +35,6 @@ public class Historic {
                         firstPurchase_ = lastPurchase_ = novaEntrada;
                         allPurchases_.add(novaEntrada);
                 }
-                sync();
         }
 
         public void remove() {}
@@ -122,32 +121,26 @@ public class Historic {
                                 Object obj = jsonParser.parse(arquivoJson);
                                 if (obj instanceof JSONArray) {
                                         jsonArray = (JSONArray) obj;
-                                        jsonArray.forEach(Purchase -> {
-                                                try {
-                                                        getJson((JSONObject) Purchase);
-                                                } catch (FileNotFoundException e) {
-                                                        e.printStackTrace();
-                                                }
-                                        });
+                                        jsonArray.forEach(Purchase -> getJson((JSONObject) Purchase));
                                 }
-                        } else {
-                                return;
                         }
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
         }
         // Obtem os arquivos
-        private void getJson(JSONObject obj) throws FileNotFoundException {
+        private void getJson(JSONObject obj){
                 Purchase novo = new Purchase();
-
+                // busco o cliente na minha agenda
                 Client tmp = agenda.findIt(obj.get("cliente").toString());
 
                 if (tmp != null) {
+                        // minha compra passa a ter meu cliente
                         novo.setClient(tmp);
                         Date date = (Date) obj.get("data");
                         novo.setDate_(date);
                         novo.setValue_(Double.parseDouble(obj.get("valor").toString()));
+                        // A lista de produtos/serviços está armazenada em um array no json
                         JSONArray js = (JSONArray) obj.get("produtos");
                         for (Object i : js.toArray()) {
                                 novo.addProducts(i.toString());
@@ -157,6 +150,8 @@ public class Historic {
                                 novo.addServices(i.toString());
                         }
                         novo.setPaymentMethod_(obj.get("metodo").toString());
+
+                        tmp.addPurchase(novo);
                 }
 
                 allPurchases_.add(novo);

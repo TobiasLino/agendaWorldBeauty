@@ -74,7 +74,7 @@ public class Client implements Serializable {
                 return historic_;
         }
 
-        public void setHistoric_(Historic historic_) {
-                this.historic_ = historic_;
+        public void addPurchase(Purchase novaCompra) {
+                this.historic_.Add(novaCompra);
         }
 }
