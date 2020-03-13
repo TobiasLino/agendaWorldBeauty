@@ -13,6 +13,8 @@ import java.io.IOException;
 
 /*      Inicia o sistema.       */
 public class Main {
+        // Número de identificação dos ids das compras
+        public static int ID;
         public static void main(String[] args) throws IOException, ParseException {
                 // operações especiais e com arquivo
                 Controller ctrl = new Controller();
@@ -34,7 +36,9 @@ public class Main {
                                 case 3 : menu.removeCliente(agenda_); break;
                                 case 4 : menu.editaCliente(agenda_); break;
                                 case 5 : menu.geraRelatorio(agenda_); break;
-                                case 6 : return;
+                                case 6 : menu.historicMenu(agenda_, historicoUnidade); break;
+                                case 7 : menu.purchaseMenu(historicoUnidade, agenda_); break;
+                                case 8 : return;
                                 default:
                                         System.out.println("Digite uma opção válida.");
                         }

@@ -6,8 +6,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
-import java.util.Date;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +23,11 @@ public class Historic {
         private List<Purchase> allPurchases_;
 
         private JSONArray jsonArray = null;
-
+        public Historic() {
+                this.agenda = null;
+                firstPurchase_ = lastPurchase_ = null;
+                allPurchases_ = new LinkedList<>();
+        }
         public Historic(Agenda agenda) {
                 this.agenda = agenda;
                 firstPurchase_ = lastPurchase_ = null;
@@ -35,21 +42,26 @@ public class Historic {
                         firstPurchase_ = lastPurchase_ = novaEntrada;
                         allPurchases_.add(novaEntrada);
                 }
+                sync();
+        }
+        // Retorna uma compra referênciada pelo id
+        public Purchase findIt(int id) {
+                Iterator<Purchase> i = allPurchases_.iterator();
+                while (i.hasNext()) {
+                        if (i.next().getId() == id) {
+                                return i.next();
+                        }
+                }
+                return null;
         }
 
-        public void remove() {}
-
-        public Purchase GetFirst() {
-                return this.firstPurchase_;
-        }
-
-        public Purchase GetLast() {
-                return this.lastPurchase_;
+        public int size() { return allPurchases_.size(); }
+        // Remove uma compra
+        public void remove(int id) {
+                allPurchases_.removeIf(compra -> compra.getId() == id);
         }
 
         public void Print() {
-                Controller op = new Controller();
-                op.histTitle();
                 for (Purchase compra : allPurchases_) {
                         compra.print();
                 }
@@ -83,27 +95,12 @@ public class Historic {
                 jo.put("valor", p.getValue_());
                 // Passa os produtos como um array
                 if (p.getProducts() != null) {
-                        JSONObject jo2 = new JSONObject();
-                        JSONArray jsonA = new JSONArray();
-                        int key = 0;
-                        for (String i : p.getProducts()) {
-                                jo2.put(key++, i);
-                        }
-                        jsonA.add(jo2);
-                        jo.put("produtos", jsonA);
+                        jo.put("produtos", p.getProducts());
                 } else {
                         jo.put("produtos", "");
                 }
                 if (p.getServices() != null) {
-                        // Passa os serviços como um array
-                        JSONObject jo2 = new JSONObject();
-                        JSONArray jsonA = new JSONArray();
-                        int key = 0;
-                        for (String i : p.getServices()) {
-                                jo2.put(key++, i);
-                        }
-                        jsonA.add(jo2);
-                        jo.put("servicos", jsonA);
+                        jo.put("servicos", p.getServices());
                 } else {
                         jo.put("servicos", "");
                 }
@@ -137,18 +134,11 @@ public class Historic {
                 if (tmp != null) {
                         // minha compra passa a ter meu cliente
                         novo.setClient(tmp);
-                        Date date = (Date) obj.get("data");
+                        String date =  obj.get("data").toString();;
                         novo.setDate_(date);
                         novo.setValue_(Double.parseDouble(obj.get("valor").toString()));
-                        // A lista de produtos/serviços está armazenada em um array no json
-                        JSONArray js = (JSONArray) obj.get("produtos");
-                        for (Object i : js.toArray()) {
-                                novo.addProducts(i.toString());
-                        }
-                        js = (JSONArray) obj.get("servicos");
-                        for (Object i : js.toArray()) {
-                                novo.addServices(i.toString());
-                        }
+                        novo.addProducts(obj.get("produtos").toString());
+                        novo.addServices(obj.get("servicos").toString());
                         novo.setPaymentMethod_(obj.get("metodo").toString());
 
                         tmp.addPurchase(novo);

@@ -19,7 +19,7 @@ public class Client implements Serializable {
                 birth_ = "";
                 gender_ = "";
                 phone_ = null;
-                historic_ = null;
+                historic_ = new Historic();
         }
 
         public void Print() {

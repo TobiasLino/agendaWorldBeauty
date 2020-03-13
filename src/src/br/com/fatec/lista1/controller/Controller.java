@@ -123,7 +123,8 @@ public class Controller {
         }
         // Define o titulo da tabela de compras
         public void histTitle() {
-                System.out.printf("\n%40s|%10s|%50s|%50s|%10s\n", "Cliente", "Data", "Produtos", "Serviços", "Pagamento");
+                System.out.printf("\n%4s|%30s|%30s|%40s|%40s|%10s|%7s\n",
+                        "ID", "Cliente", "Data", "Produtos", "Serviços", "Pagamento", "Valor");
         }
         // Imprime relatório.
         public void impRelatorio(Agenda agenda) {

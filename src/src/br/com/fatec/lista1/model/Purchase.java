@@ -1,35 +1,41 @@
 package br.com.fatec.lista1.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Purchase {
+        private static int ID;
+        private int id;
         private Client client_;
-        private Date date_;
+        private String date_;
         private double value_;
-        private List<String> products_;
-        private List<String> services_;
+        private String products_;
+        private String services_;
         private String payment;
 
         public Purchase() {
+                ID++;
+                id = ID;
                 client_ = null;
-                date_ = new Date(); // A data será sempre o dia atual.
+                date_ = new Date().toString(); // A data será sempre o dia atual.
                 value_ = 0.0;
-                products_ = new LinkedList<>();
-                services_ = new LinkedList<>();
+                products_ = "";
+                services_ = "";
                 payment = "dinheiro";
         }
 
         public void print() {
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                System.out.printf("%40s|%10s|%50s|%50s|%10s\n", client_.getName_(), df.format(date_),
-                        products_, services_, payment);
+                if (client_ != null) {
+                        System.out.printf("\n%4s|%30s|%30s|", id, client_.getName_(), date_);
+                        System.out.printf("%40s|%40s|%10s|%5.2f", products_, services_, payment, value_);
+                } else {
+                        System.out.printf("\n%4s|%30s|%30s|", id, "", date_);
+                        System.out.printf("%40s|%40s|%10s|%5.2f", products_, services_, payment, value_);
+                }
         }
         public void setClient(Client client) {
                 client_ = client;
         }
+
         public String getClient() {
                 if (client_ != null) {
                         return client_.getName_();
@@ -42,7 +48,7 @@ public class Purchase {
                 return date_.toString();
         }
 
-        public void setDate_(Date date_) {
+        public void setDate_(String date) {
                 this.date_ = date_;
         }
 
@@ -54,20 +60,20 @@ public class Purchase {
                 this.value_ = value_;
         }
 
-        public List<String> getProducts() {
+        public String getProducts() {
                 return products_;
         }
 
         public void addProducts(String produto) {
-                products_.add(produto);
+                products_ = produto;
         }
 
-        public List<String> getServices() {
+        public String getServices() {
                 return services_;
         }
 
         public void addServices(String servico) {
-                services_.add(servico);
+                services_ = servico;
         }
 
         public String getPaymentMethod_() {
@@ -77,4 +83,6 @@ public class Purchase {
         public void setPaymentMethod_(String method) {
                 this.payment = method;
         }
+
+        public int getId() { return id; }
 }
