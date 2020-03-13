@@ -2,74 +2,79 @@ package br.com.fatec.lista1.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Purchase {
-    private Client client_;
-    private Date date_;
-    private double value_;
-    private String products_;
-    private String services_;
-    private String paymentMethod_;
+        private Client client_;
+        private Date date_;
+        private double value_;
+        private List<String> products_;
+        private List<String> services_;
+        private String payment;
 
-    public Purchase() {
-        date_ = new Date();
-        value_ = 0.0;
-        products_ = "";
-        services_ = "";
-        paymentMethod_ = "dinheiro";
-    }
-
-    public void Print() {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String printed = "Compra realizada por: " + client_.getName_()
-                + "\nData: " +  df.format(date_);
-        if (!products_.equals("")) {
-            printed += "\nProdutos: " + products_;
+        public Purchase() {
+                client_ = null;
+                date_ = new Date(); // A data será sempre o dia atual.
+                value_ = 0.0;
+                products_ = new LinkedList<>();
+                services_ = new LinkedList<>();
+                payment = "dinheiro";
         }
-        if (!services_.equals("")) {
-            printed += "\nServiços: " + services_;
+
+        public void print() {
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                System.out.printf("%40s|%10s|%50s|%50s|%10s\n", client_.getName_(), df.format(date_),
+                        products_, services_, payment);
         }
-        printed += "\nMétodo de pagamento: " + paymentMethod_;
-        System.out.println(printed);
-    }
+        public void setClient(Client client) {
+                client_ = client;
+        }
+        public String getClient() {
+                if (client_ != null) {
+                        return client_.getName_();
+                } else {
+                        return "";
+                }
+        }
 
-    public String getDate_() {
-        return date_.toString();
-    }
+        public String getDate_() {
+                return date_.toString();
+        }
 
-    public void setDate_(Date date_) {
-        this.date_ = date_;
-    }
+        public void setDate_(Date date_) {
+                this.date_ = date_;
+        }
 
-    public double getValue_() {
-        return value_;
-    }
+        public double getValue_() {
+                return value_;
+        }
 
-    public void setValue_(double value_) {
-        this.value_ = value_;
-    }
+        public void setValue_(double value_) {
+                this.value_ = value_;
+        }
 
-    public String getProducts_() {
-        return products_;
-    }
+        public List<String> getProducts() {
+                return products_;
+        }
 
-    public void setProducts_(String products_) {
-        this.products_ = products_;
-    }
+        public void addProducts(String produto) {
+                products_.add(produto);
+        }
 
-    public String getServices_() {
-        return services_;
-    }
+        public List<String> getServices() {
+                return services_;
+        }
 
-    public void setServices_(String services_) {
-        this.services_ = services_;
-    }
+        public void addServices(String servico) {
+                services_.add(servico);
+        }
 
-    public String getPaymentMethod_() {
-        return paymentMethod_;
-    }
+        public String getPaymentMethod_() {
+                return payment;
+        }
 
-    public void setPaymentMethod_(String paymentMethod_) {
-        this.paymentMethod_ = paymentMethod_;
-    }
+        public void setPaymentMethod_(String method) {
+                this.payment = method;
+        }
 }
