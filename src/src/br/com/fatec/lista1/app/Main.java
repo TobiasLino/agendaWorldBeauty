@@ -11,21 +11,22 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-/*
-Inicia o sistema.
-Cria um objeto para manipulação dos menus disponíveis.
-Cria uma agenda para modificação dos clientes.
-Cria um controlador para operações adicionais
-Cria um Historico da Unidade
- */
+/*      Inicia o sistema.       */
 public class Main {
         public static void main(String[] args) throws IOException, ParseException {
+                // operações especiais e com arquivo
                 Controller ctrl = new Controller();
+                // interface
                 Menus menu = new Menus();
+                // lista de clientes
                 Agenda agenda_ = new Agenda();
+                // histórico de compras da unidade
                 Historic historicoUnidade = new Historic(agenda_);
+                // verifica se o arquivo de clients existe
                 ctrl.fileCheck("agenda.json", agenda_);
+                // verifica se o histórico existe
                 ctrl.fileCheck("historic.json", historicoUnidade);
+                // opções
                 while (true) {
                         switch (menu.mainMenu()) {
                                 case 1 : menu.InsertClient(agenda_); break;
