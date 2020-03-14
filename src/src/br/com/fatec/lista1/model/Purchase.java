@@ -58,11 +58,11 @@ public class Purchase {
         }
 
         public String getDate_() {
-                return date_.toString();
+                return date_;
         }
 
         public void setDate_(String date) {
-                this.date_ = date_;
+                this.date_ = date;
         }
 
         public double getValue_() {
