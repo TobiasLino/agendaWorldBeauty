@@ -4,7 +4,6 @@ import br.com.fatec.lista1.controller.Controller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileReader;
@@ -19,29 +18,25 @@ import java.util.logging.Logger;
 public class Historic {
         private Agenda agenda;
         private Purchase firstPurchase_;
-        private Purchase lastPurchase_;
         private List<Purchase> allPurchases_;
 
         private JSONArray jsonArray = null;
         public Historic() {
                 this.agenda = null;
-                firstPurchase_ = lastPurchase_ = null;
+                firstPurchase_ = null;
                 allPurchases_ = new LinkedList<>();
         }
         public Historic(Agenda agenda) {
                 this.agenda = agenda;
-                firstPurchase_ = lastPurchase_ = null;
+                firstPurchase_ = null;
                 allPurchases_ = new LinkedList<>();
         }
 
         public void Add(Purchase novaEntrada) {
-                if (firstPurchase_ != null) {
-                        lastPurchase_ = novaEntrada;
-                        allPurchases_.add(novaEntrada);
-                } else {
-                        firstPurchase_ = lastPurchase_ = novaEntrada;
-                        allPurchases_.add(novaEntrada);
+                if (firstPurchase_ == null) {
+                        firstPurchase_ = novaEntrada;
                 }
+                allPurchases_.add(novaEntrada);
                 sync();
         }
         // Retorna uma compra referênciada pelo id
@@ -65,6 +60,10 @@ public class Historic {
                 for (Purchase compra : allPurchases_) {
                         compra.print();
                 }
+        }
+        // Retorna uma referência para a lista allPurchases_
+        public List<Purchase> getList() {
+                return allPurchases_;
         }
         // Sincroniza os dados com o arquivo
         @SuppressWarnings("unchecked")
@@ -108,7 +107,7 @@ public class Historic {
         }
         // Recupera os dados do arquivo.
         @SuppressWarnings("unchecked")
-        public void recover() throws IOException, ParseException {
+        public void recover() {
                 String file_name = "usrFiles//historic//historic.json";
                 JSONParser jsonParser = new JSONParser();
                 try {
@@ -134,7 +133,7 @@ public class Historic {
                 if (tmp != null) {
                         // minha compra passa a ter meu cliente
                         novo.setClient(tmp);
-                        String date =  obj.get("data").toString();;
+                        String date =  obj.get("data").toString();
                         novo.setDate_(date);
                         novo.setValue_(Double.parseDouble(obj.get("valor").toString()));
                         novo.addProducts(obj.get("produtos").toString());

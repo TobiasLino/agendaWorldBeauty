@@ -120,14 +120,14 @@ public class Menus {
                                                         // se não, sincroniza com o arquivo
                                                         agenda.sync();
                                                         option = 1;
-                                                        break;
                                                 } else {
-                                                        option = 0; break;
+                                                        option = 0;
                                                 }
                                         } else {
                                                 System.out.println("O cliente não possui nome");
-                                                option = 0; break;
+                                                option = 0;
                                         }
+                                        break;
                                 default:
                                         System.out.println("Digite uma opção válida");
                         }
@@ -165,13 +165,13 @@ public class Menus {
                 return opt;
         }
         // Menu para seleção da opção
-        public void geraRelatorio(Agenda agenda) throws IOException {
-                int n = 0;
+        public void geraRelatorio(Agenda agenda, Historic historic) throws IOException {
+                int n;
                 do {
                         n = relOptions();
                         switch (n) {
-                                case 1: op.impRelatorio(agenda); break;
-                                case 2: op.saveRelatorio(agenda); break;
+                                case 1: op.impRelatorio(agenda, historic); break;
+                                case 2: op.saveRelatorio(agenda, historic); break;
                                 case 3: return;
                                 default: System.out.println("Insira uma opção válida.");
                         }
@@ -206,7 +206,6 @@ public class Menus {
         // Historico geral
         private void geralHist(Historic historic) {
                 if (historic.size() > 0) {
-                        op.histTitle();
                         historic.Print();
                 } else {
                         System.out.println("Nenhuma compra cadastrada.");
@@ -218,7 +217,6 @@ public class Menus {
                 if (!nome.equals("")) {
                         Client tmp = agenda.findIt(nome);
                         if (tmp != null && tmp.getHistoric_() != null) {
-                                op.histTitle();
                                 tmp.getHistoric_().Print();
                         } else {
                                 System.out.println("Cliente não encontrado.");
@@ -306,7 +304,6 @@ public class Menus {
         private void editPurchase(Historic historic, Purchase nova, Agenda agenda) {
                 int opt = 0;
                 while (opt != 6) {
-                        op.histTitle();
                         nova.print();
                         opt = editPurchaseOptions();
                         switch (opt) {
@@ -339,21 +336,32 @@ public class Menus {
                         System.out.println("Cliente não encontrado.");
                 }
         }
+        // Opções dos produtos disponíveis
+        private String availableProducts(Purchase purchase) {
+                String[] produtos = purchase.getAvailableProducts();
+                System.out.printf("\nInsira o Valor correspondente ao produto.\n"
+                        + "\t1. %23s\t2. %23s\n\t3. %23s\t4. %23s\n"
+                        + "\t5. %23s\t6. %23s\n\t7. %23s\t8. %23s\n"
+                        + "\t9. %23s\t10. %23s\n\t11. %23s\t12. %23s\n",
+                        produtos[0], produtos[1], produtos[2], produtos[3],
+                        produtos[4], produtos[5], produtos[6], produtos[7],
+                        produtos[8], produtos[9], produtos[10], produtos[11]
+                );
+                return op.getOption("Digite sua opção [Enter para sair/confirmar] : ");
+        }
         // Adiciona os produtos à compra
         private void addProductsToPurchase(Purchase compra) {
-                String product = op.getOption("Insira o produto [Enter para finalizar] : ");
-                while (!product.equals("")) {
-                        compra.addProducts(product);
-                        product = op.getOption("Insira o próximo produto [Enter para finalizar] : ");
+                String opt = availableProducts(compra);
+                while (!opt.equals("")) {
+                        int index = Integer.parseInt(opt);
+                        compra.addProductsByIndex(index);
+                        opt = availableProducts(compra);
                 }
         }
         // Adiciona os serviços à compra
         private void addServicesToPurchase(Purchase compra) {
                 String service = op.getOption("Insira o serviço [Enter para finalizar] : ");
-                while (!service.equals("")) {
-                        compra.addServices(service);
-                        service = op.getOption("Insira o próximo serviço [Enter para finalizar] : ");
-                }
+                compra.addServices(service);
         }
         // Adiciona o valor da compra
         private void addValueToPurchase(Purchase compra) {

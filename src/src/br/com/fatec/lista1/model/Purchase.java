@@ -9,6 +9,9 @@ public class Purchase {
         private String date_;
         private double value_;
         private String products_;
+        private String[] availableProducts = {"Barba Rubra", "Pó para Barba", "Shampoo Lisos", "Shampoo anticaspa",
+                "Shampoo Ondulados", "Shampoo Crespos", "Condicionador Lisos", "Condicionador Ondulados",
+                "Condicionador Crespos", "Esmalte", "Gel", "Creme para pentear"};
         private String services_;
         private String payment;
 
@@ -25,11 +28,16 @@ public class Purchase {
 
         public void print() {
                 if (client_ != null) {
-                        System.out.printf("\n%4s|%30s|%30s|", id, client_.getName_(), date_);
-                        System.out.printf("%40s|%40s|%10s|%5.2f", products_, services_, payment, value_);
+                        System.out.println("\nid: " + id + "\nNome: " + client_.getName_()
+                                + "\nData: " + date_ + "\nProdutos: " + products_
+                                + "\nServiços: " + services_ + "\nMétodo de pagamento: " + payment
+                                + "\nValor: R$" + value_);
                 } else {
-                        System.out.printf("\n%4s|%30s|%30s|", id, "", date_);
-                        System.out.printf("%40s|%40s|%10s|%5.2f", products_, services_, payment, value_);
+
+                        System.out.println("\nid: " + id + "\nNome: " + ""
+                                + "\nData: " + date_ + "\nProdutos: " + products_
+                                + "\nServiços: " + services_ + "\nMétodo de pagamento: " + payment
+                                + "\nValor: R$" + value_);
                 }
         }
         public void setClient(Client client) {
@@ -39,17 +47,22 @@ public class Purchase {
         public String getClient() {
                 if (client_ != null) {
                         return client_.getName_();
-                } else {
-                        return "";
                 }
+                return "";
+        }
+        public Client getClientRef() {
+                if (client_ != null) {
+                        return client_;
+                }
+                return null;
         }
 
         public String getDate_() {
-                return date_.toString();
+                return date_;
         }
 
         public void setDate_(String date) {
-                this.date_ = date_;
+                this.date_ = date;
         }
 
         public double getValue_() {
@@ -66,6 +79,9 @@ public class Purchase {
 
         public void addProducts(String produto) {
                 products_ = produto;
+        }
+        public void addProductsByIndex(int pIndex) {
+                products_ += availableProducts[pIndex] + ", ";
         }
 
         public String getServices() {
@@ -85,4 +101,8 @@ public class Purchase {
         }
 
         public int getId() { return id; }
+
+        public String[] getAvailableProducts() {
+                return availableProducts;
+        }
 }

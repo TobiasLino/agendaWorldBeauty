@@ -35,7 +35,7 @@ public class Main {
                                 case 2 : menu.ListClients(agenda_); break;
                                 case 3 : menu.removeCliente(agenda_); break;
                                 case 4 : menu.editaCliente(agenda_); break;
-                                case 5 : menu.geraRelatorio(agenda_); break;
+                                case 5 : menu.geraRelatorio(agenda_, historicoUnidade); break;
                                 case 6 : menu.historicMenu(agenda_, historicoUnidade); break;
                                 case 7 : menu.purchaseMenu(historicoUnidade, agenda_); break;
                                 case 8 : return;
