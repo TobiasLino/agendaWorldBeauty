@@ -120,14 +120,14 @@ public class Menus {
                                                         // se não, sincroniza com o arquivo
                                                         agenda.sync();
                                                         option = 1;
-                                                        break;
                                                 } else {
-                                                        option = 0; break;
+                                                        option = 0;
                                                 }
                                         } else {
                                                 System.out.println("O cliente não possui nome");
-                                                option = 0; break;
+                                                option = 0;
                                         }
+                                        break;
                                 default:
                                         System.out.println("Digite uma opção válida");
                         }
@@ -166,7 +166,7 @@ public class Menus {
         }
         // Menu para seleção da opção
         public void geraRelatorio(Agenda agenda, Historic historic) throws IOException {
-                int n = 0;
+                int n;
                 do {
                         n = relOptions();
                         switch (n) {
@@ -351,7 +351,6 @@ public class Menus {
         }
         // Adiciona os produtos à compra
         private void addProductsToPurchase(Purchase compra) {
-                String[] produtos = compra.getAvailableProducts();
                 String opt = availableProducts(compra);
                 while (!opt.equals("")) {
                         int index = Integer.parseInt(opt);
