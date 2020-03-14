@@ -121,19 +121,14 @@ public class Controller {
         public void title() {
                 System.out.printf("\n%40s|%3s|%10s|%12s|%17s\n","Nome", "Age", "Birth", "Gender", "Phone");
         }
-        // Define o titulo da tabela de compras
-        public void histTitle() {
-                System.out.printf("\n%4s|%30s|%30s|%40s|%40s|%10s|%7s\n",
-                        "ID", "Cliente", "Data", "Produtos", "Serviços", "Pagamento", "Valor");
-        }
         // Imprime relatório.
-        public void impRelatorio(Agenda agenda) {
-                Report rep = new Report(agenda);
+        public void impRelatorio(Agenda agenda, Historic historic) {
+                Report rep = new Report(agenda, historic);
                 rep.printReport();
         }
         // Salva o arquivo com o relatório
-        public void saveRelatorio(Agenda agenda) throws IOException {
-                Report rep = new Report(agenda);
+        public void saveRelatorio(Agenda agenda, Historic historic) throws IOException {
+                Report rep = new Report(agenda, historic);
                 rep.getReportFile();
         }
         // Verifica se o arquivo existe

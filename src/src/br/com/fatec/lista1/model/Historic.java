@@ -66,6 +66,10 @@ public class Historic {
                         compra.print();
                 }
         }
+        // Retorna uma referência para a lista allPurchases_
+        public List<Purchase> getList() {
+                return allPurchases_;
+        }
         // Sincroniza os dados com o arquivo
         @SuppressWarnings("unchecked")
         public void sync() {
