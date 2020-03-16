@@ -187,6 +187,7 @@ public class Menus {
                 int opt = 0;
                 if (!result.equals("")) {
                         opt = Integer.parseInt(result);
+
                 }
                 return opt;
         }
@@ -258,11 +259,10 @@ public class Menus {
                 System.out.println("\nSelecione uma das opções\n"
                         + "\t1. Adicionar cliente.\n"
                         + "\t2. Adicionar produtos.\n"
-                        + "\t3. Adicionar serviços.\n"
-                        + "\t4. Adicionar valor.\n"
-                        + "\t5. Adicionar método de pagamento.\n"
-                        + "\t6. Cancelar\n"
-                        + "\t7. Salvar.");
+                        + "\t3. Adicionar valor.\n"
+                        + "\t4. Adicionar método de pagamento.\n"
+                        + "\t5. Cancelar\n"
+                        + "\t6. Salvar.");
                 String result = op.getOption("Digite sua opção: ");
                 int opt = 0;
                 if (!result.equals("")) {
@@ -309,16 +309,17 @@ public class Menus {
                         switch (opt) {
                                 case 1: addClientToPurchase(agenda, nova); break;
                                 case 2: addProductsToPurchase(nova); break;
-                                case 3: addServicesToPurchase(nova); break;
-                                case 4: addValueToPurchase(nova); break;
-                                case 5: addPaymentToPurchase(nova); break;
-                                case 7:
+                                case 3: addValueToPurchase(nova); break;
+                                case 4: addPaymentToPurchase(nova); break;
+                                case 6:
                                         String name = nova.getClient();
                                         if (name.equals("")) {
                                                 System.out.println("Insira o nome do cliente");
                                                 break;
                                         } else {
                                                 if (confirmOption()) {
+                                                        Client tmp = agenda.findIt(name);
+                                                        if (tmp != null) tmp.addPurchase(nova);
                                                         historic.Add(nova);
                                                         return;
                                                 }
@@ -340,12 +341,14 @@ public class Menus {
         private String availableProducts(Purchase purchase) {
                 String[] produtos = purchase.getAvailableProducts();
                 System.out.printf("\nInsira o Valor correspondente ao produto.\n"
-                        + "\t1. %23s\t2. %23s\n\t3. %23s\t4. %23s\n"
-                        + "\t5. %23s\t6. %23s\n\t7. %23s\t8. %23s\n"
-                        + "\t9. %23s\t10. %23s\n\t11. %23s\t12. %23s\n",
+                        + "\t0. %52s\t1. %52s\n\t2. %52s\t3. %52s\n"
+                        + "\t4. %52s\t5. %52s\n\t6. %52s\t7. %52s\n"
+                        + "\t8. %52s\t9. %52s\n\t10. %52s\t11. %52s\n"
+                        + "\t12. %52s\n",
                         produtos[0], produtos[1], produtos[2], produtos[3],
                         produtos[4], produtos[5], produtos[6], produtos[7],
-                        produtos[8], produtos[9], produtos[10], produtos[11]
+                        produtos[8], produtos[9], produtos[10], produtos[11],
+                        produtos[12]
                 );
                 return op.getOption("Digite sua opção [Enter para sair/confirmar] : ");
         }
@@ -354,14 +357,11 @@ public class Menus {
                 String opt = availableProducts(compra);
                 while (!opt.equals("")) {
                         int index = Integer.parseInt(opt);
-                        compra.addProductsByIndex(index);
-                        opt = availableProducts(compra);
+                        if (index >= 0 && index < 13) {
+                                compra.addProductsByIndex(index);
+                                opt = availableProducts(compra);
+                        }
                 }
-        }
-        // Adiciona os serviços à compra
-        private void addServicesToPurchase(Purchase compra) {
-                String service = op.getOption("Insira o serviço [Enter para finalizar] : ");
-                compra.addServices(service);
         }
         // Adiciona o valor da compra
         private void addValueToPurchase(Purchase compra) {
