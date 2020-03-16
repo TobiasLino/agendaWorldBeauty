@@ -9,9 +9,19 @@ public class Purchase {
         private String date_;
         private double value_;
         private String products_;
-        private String[] availableProducts = {"Barba Rubra", "Pó para Barba", "Shampoo Lisos", "Shampoo anticaspa",
-                "Shampoo Ondulados", "Shampoo Crespos", "Condicionador Lisos", "Condicionador Ondulados",
-                "Condicionador Crespos", "Esmalte", "Gel", "Creme para pentear"};
+        private String[] availableProducts = {"manicure",
+                "pedicure",
+                "design de sobrancelhas",
+                "corte",
+                "pintura de cabelos",
+                "remoção de rugas",
+                "remoção de manchas na pele",
+                "aplicação de botox",
+                "tratamento para emagrecimento e redução de medidas",
+                "barbearia",
+                "modelagem e corte de barba",
+                "tratamento para queda",
+                "produtos especializados"};
         private String services_;
         private String payment;
 
@@ -28,16 +38,20 @@ public class Purchase {
 
         public void print() {
                 if (client_ != null) {
-                        System.out.println("\nid: " + id + "\nNome: " + client_.getName_()
-                                + "\nData: " + date_ + "\nProdutos: " + products_
-                                + "\nServiços: " + services_ + "\nMétodo de pagamento: " + payment
-                                + "\nValor: R$" + value_);
+                        System.out.println( "\nid: " + id
+                                + "\nNome: " + client_.getName_()
+                                + "\nData: " + date_
+                                + "\nProdutos: " + products_
+                                + "\nMétodo de pagamento: " + payment
+                                + "\nValor: R$" + value_ );
                 } else {
 
-                        System.out.println("\nid: " + id + "\nNome: " + ""
-                                + "\nData: " + date_ + "\nProdutos: " + products_
-                                + "\nServiços: " + services_ + "\nMétodo de pagamento: " + payment
-                                + "\nValor: R$" + value_);
+                        System.out.println( "\nid: " + id
+                                + "\nNome: " + ""
+                                + "\nData: " + date_
+                                + "\nProdutos: " + products_
+                                + "\nMétodo de pagamento: " + payment
+                                + "\nValor: R$" + value_ );
                 }
         }
         public void setClient(Client client) {
