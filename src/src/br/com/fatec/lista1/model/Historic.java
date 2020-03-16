@@ -1,3 +1,20 @@
+/*
+        This file is part of AgendaGrupoWorldBeauty.
+
+        AgendaGrupoWorldBeauty is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        AgendaGrupoWorldBeauty is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
+ */
 package br.com.fatec.lista1.model;
 
 import br.com.fatec.lista1.controller.Controller;
@@ -19,8 +36,11 @@ public class Historic {
         private Agenda agenda;
         private Purchase firstPurchase_;
         private List<Purchase> allPurchases_;
-
-        private JSONArray jsonArray = null;
+        // array para salvar o arquivo json
+        JSONArray jsonArray = null;
+        /*
+         * Constructors
+         */
         public Historic() {
                 this.agenda = null;
                 firstPurchase_ = null;
@@ -31,7 +51,9 @@ public class Historic {
                 firstPurchase_ = null;
                 allPurchases_ = new LinkedList<>();
         }
-
+        // Adiciona uma compra ao histórico.
+        // Nesta classe, os dados devem ser ordenados à medida que o usuário os insere
+        // não necessitando uma ordenação alfabética.
         public void Add(Purchase novaEntrada) {
                 if (firstPurchase_ == null) {
                         firstPurchase_ = novaEntrada;
@@ -49,13 +71,13 @@ public class Historic {
                 }
                 return null;
         }
-
+        // Total de compras cadastradas
         public int size() { return allPurchases_.size(); }
         // Remove uma compra
         public void remove(int id) {
                 allPurchases_.removeIf(compra -> compra.getId() == id);
         }
-
+        // Imprime de acordo com o método de impressão de purchase
         public void Print() {
                 for (Purchase compra : allPurchases_) {
                         compra.print();
@@ -98,11 +120,6 @@ public class Historic {
                 } else {
                         jo.put("produtos", "");
                 }
-                if (p.getServices() != null) {
-                        jo.put("servicos", p.getServices());
-                } else {
-                        jo.put("servicos", "");
-                }
                 jo.put("metodo", p.getPaymentMethod_());
         }
         // Recupera os dados do arquivo.
@@ -137,7 +154,6 @@ public class Historic {
                         novo.setDate_(date);
                         novo.setValue_(Double.parseDouble(obj.get("valor").toString()));
                         novo.addProducts(obj.get("produtos").toString());
-                        novo.addServices(obj.get("servicos").toString());
                         novo.setPaymentMethod_(obj.get("metodo").toString());
 
                         tmp.addPurchase(novo);

@@ -1,6 +1,20 @@
-//
-//  Tobias Lino 2020.
-//
+/*
+        This file is part of AgendaGrupoWorldBeauty.
+
+        AgendaGrupoWorldBeauty is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        AgendaGrupoWorldBeauty is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
+ */
 package br.com.fatec.lista1.view;
 
 import br.com.fatec.lista1.controller.Controller;
@@ -79,7 +93,7 @@ public class Menus {
                 return opt;
         }
         // Cria o cliente a ser inserido.
-        public void InsertClient(Agenda agenda) throws IOException {
+        public void InsertClient(Agenda agenda) {
                 Client novoCliente = new Client();
                 editaClienteInfos(agenda, novoCliente, true);
         }
@@ -101,7 +115,7 @@ public class Menus {
         }
         // Edita os dados do cliente selecionado, true se for adiciona-lo à agenda
         // e false se apenas for editar.
-        public void editaClienteInfos(Agenda agenda, Client cliente, boolean novoCliente) throws IOException {
+        public void editaClienteInfos(Agenda agenda, Client cliente, boolean novoCliente) {
                 int option = 0;
                 while (option != 1) {
                         tempClientInfos(cliente);
@@ -134,17 +148,19 @@ public class Menus {
                 }
         }
         // Edita as informações do cliente
-        public void editaCliente(Agenda agenda) throws IOException {
+        public void editaCliente(Agenda agenda) {
                 String name = op.getOption("Digite o nome do cliente: ");
                 Client toEdit = agenda.findIt(name);
-                if (op.verificaCliente(toEdit, agenda)) editaClienteInfos(agenda, toEdit, false);
+                if (op.checkIfNotNull(toEdit)) {
+                        editaClienteInfos(agenda, toEdit, false);
+                }
         }
         // Remove o cliente selecionado.
-        public void removeCliente(Agenda agenda) throws IOException {
+        public void removeCliente(Agenda agenda) {
                 String name = op.getOption("Digite o nome do cliente: ");
                 Client toRemove = agenda.findIt(name);
-                if (op.verificaCliente(toRemove, agenda)) {
-                        Client lx = op.getClient(name, agenda);
+                if (op.checkIfNotNull(toRemove)) {
+                        Client lx = agenda.findIt(name);
                         if (confirmOption()) {
                                 agenda.remove(lx);
                         }
@@ -217,7 +233,7 @@ public class Menus {
                 String nome = op.getOption("Digite o nome do cliente: ");
                 if (!nome.equals("")) {
                         Client tmp = agenda.findIt(nome);
-                        if (tmp != null && tmp.getHistoric_() != null) {
+                        if (op.checkIfNotNull(tmp) && op.checkIfNotNull(tmp.getHistoric_())) {
                                 tmp.getHistoric_().Print();
                         } else {
                                 System.out.println("Cliente não encontrado.");
@@ -293,7 +309,7 @@ public class Menus {
                 while (!purchaseId.equals("")) {
                         int id = Integer.parseInt(purchaseId);
                         Purchase tmp = historic.findIt(id);
-                        if (tmp != null) {
+                        if (op.checkIfNotNull(tmp)) {
                                 editPurchase(historic, tmp, agenda);
                         } else {
                                 System.out.println("Id incorreto");
@@ -319,7 +335,7 @@ public class Menus {
                                         } else {
                                                 if (confirmOption()) {
                                                         Client tmp = agenda.findIt(name);
-                                                        if (tmp != null) tmp.addPurchase(nova);
+                                                        if (op.checkIfNotNull(tmp)) tmp.addPurchase(nova);
                                                         historic.Add(nova);
                                                         return;
                                                 }
@@ -331,7 +347,7 @@ public class Menus {
         private void addClientToPurchase(Agenda agenda, Purchase compra) {
                 String name = op.getOption("Insira o nome do cliente: ");
                 Client tmp = agenda.findIt(name);
-                if (tmp != null) {
+                if (op.checkIfNotNull(tmp)) {
                         compra.setClient(tmp);
                 } else {
                         System.out.println("Cliente não encontrado.");

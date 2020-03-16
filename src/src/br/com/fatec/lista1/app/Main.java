@@ -1,34 +1,49 @@
-//
-//  Tobias Lino 2020.
-//
+/*
+        This file is part of AgendaGrupoWorldBeauty.
+
+        AgendaGrupoWorldBeauty is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        AgendaGrupoWorldBeauty is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
+ */
 package br.com.fatec.lista1.app;
 
 import br.com.fatec.lista1.controller.Controller;
 import br.com.fatec.lista1.model.Agenda;
 import br.com.fatec.lista1.model.Historic;
 import br.com.fatec.lista1.view.Menus;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-/*      Inicia o sistema.       */
 public class Main {
-        // Número de identificação dos ids das compras
-        public static int ID;
-        public static void main(String[] args) throws IOException, ParseException {
-                // operações especiais e com arquivo
+        public static void main(String[] args) throws IOException {
+                // Nota de copyright da GPL
+                System.out.println("AgendaWorldBeauty  Copyright (C) 2020  Tobias da Silva Lino\n" +
+                        "    This program comes with ABSOLUTELY NO WARRANTY.\n" +
+                        "    This is free software, and you are welcome to redistribute it\n" +
+                        "    under certain conditions.\n");
+                // Operações especiais e com arquivo
                 Controller ctrl = new Controller();
-                // interface
+                // interface principal
                 Menus menu = new Menus();
-                // lista de clientes
+                // Lista de clientes
                 Agenda agenda_ = new Agenda();
-                // histórico de compras da unidade
+                // Histórico de compras da unidade
                 Historic historicoUnidade = new Historic(agenda_);
-                // verifica se o arquivo de clients existe
-                ctrl.fileCheck("agenda.json", agenda_);
-                // verifica se o histórico existe
-                ctrl.fileCheck("historic.json", historicoUnidade);
-                // opções
+                // O sistema salva os dados em arquivos .json, armazenados no diretório
+                // usrFiles, assim é necessário verificar se o mesmo existe e, se sim,
+                // analisar os dados contidos nos mesmos.
+                ctrl.fileCheck(agenda_, historicoUnidade);
+                // A partir daqui as opções ficam disponíveis para o usuário.
                 while (true) {
                         switch (menu.mainMenu()) {
                                 case 1 : menu.InsertClient(agenda_); break;

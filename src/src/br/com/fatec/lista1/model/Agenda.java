@@ -1,15 +1,31 @@
-//
-//  Tobias Lino 2020.
-//
+/*
+        This file is part of AgendaGrupoWorldBeauty.
+
+        AgendaGrupoWorldBeauty is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        AgendaGrupoWorldBeauty is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
+ */
 package br.com.fatec.lista1.model;
 
 import br.com.fatec.lista1.controller.Controller;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -24,14 +40,13 @@ public class Agenda {
         protected List<Client>[] agenda_;
         // Array para salvar no arquivo json.
         JSONArray jsonArray = null;
-        private final String file_name = "usrFiles//clients//agenda.json";
         // Define um tamanho fixo do vetor e inicializa cada elemento.
         @SuppressWarnings("unchecked")
-        public Agenda() throws FileNotFoundException {
+        public Agenda() {
                 int ALPHABETLEN = 26;
                 agenda_ = new LinkedList[ALPHABETLEN + 1];
                 for (int i = 0; i < ALPHABETLEN + 1; ++i) {
-                        agenda_[i] = new LinkedList<Client>();
+                        agenda_[i] = new LinkedList<>();
                 }
         }
         // Retorna o cliente cujo nome seja igual ao parâmetro passado.
@@ -51,20 +66,8 @@ public class Agenda {
                 agenda_[i].add(cliente);
                 agenda_[i].sort(Comparator.comparing(Client::getName_));
         }
-        // Remove um cliente pelo nome.
-        public void remove(String name) throws IOException {
-                int index = getIndex(name);
-                int valor;
-                Client lixo = new Client();
-                lixo.setName_(name);
-                // Iterator i = agenda_[index].iterator();
-                for (Client client : agenda_[index])
-                        if (client.getName_().equals(name)) {
-                                remove(client);
-                        }
-        }
         // Remove um cliente passando o objeto.
-        public void remove(Client cliente) throws IOException {
+        public void remove(Client cliente) {
                 int index = getIndex(cliente.getName_());
                 Iterator<Client> i = agenda_[index].iterator();
                 if (i.hasNext()) {
@@ -124,11 +127,7 @@ public class Agenda {
                         }
                 }
         }
-        // Verifica se a agenda contém o cliente, pelo nome.
-        public boolean contains(String clientName) {
-                Client tmp = findIt(clientName);
-                return tmp != null;
-        }
+
         // Retorna o índice correspondente a letra inicial da string passada
         // como parâmetro.
         public int getIndex(String str) {
@@ -137,13 +136,16 @@ public class Agenda {
         }
         // Salvar no arquivo.
         @SuppressWarnings("unchecked")
-        public void sync() throws IOException {
+        public void sync() {
                 Controller ctrl = new Controller();
+                String file_name = "usrFiles//clients//agenda.json";
                 File f = new File(file_name);
-                if (!f.delete())  ctrl.err("Erro ao deletar", false);
+                // deletar o arquivo foi a forma mais prática para realizar modificações
+                if (!f.delete())  {
+                        ctrl.err("Erro ao deletar", false);
+                }
                 try {
-                        // File file = new File(file_name);
-                        //file.createNewFile();
+                        // Para cada cliente, cria um objeto e o insere no array.
                         FileWriter arquivoJson = new FileWriter(file_name);
                         jsonArray = new JSONArray();
                         for (List<Client> clients : agenda_) {
@@ -174,7 +176,8 @@ public class Agenda {
         }
         // Recupera os dados do arquivo.
         @SuppressWarnings("unchecked")
-        public void recover() throws IOException, ParseException {
+        public void recover() {
+                String file_name = "usrFiles//clients//agenda.json";
                 JSONParser jsonParser = new JSONParser();
                 try {
                         File file = new File(file_name);
@@ -185,8 +188,6 @@ public class Agenda {
                                         jsonArray = (JSONArray) obj;
                                         jsonArray.forEach(Client -> getJson((JSONObject) Client));
                                 }
-                        } else {
-                                return;
                         }
                 } catch (Exception e) {
                         e.printStackTrace();
