@@ -1,0 +1,11 @@
+
+Gerando relatório para o dia: Sat Mar 14 15:51:22 BRT 2020
+Total de Clientes cadastrados: 2
+Idade média de todo o público da unidade: 27
+Idade média do público masculino: 18
+Idade média do público feminino : 37
+Idade média do público de gênero não binário: 0
+Produto mais consumido: Pó para Barba
+Produto mais consumido pelo público feminino: 
+Produto mais consumido pelo público masculino: Pó para Barba
+Produto mais consumido pelo público de gênero não binário: 

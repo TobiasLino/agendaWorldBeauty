@@ -1,0 +1,11 @@
+
+Gerando relatório para o dia: Sat Mar 14 16:23:45 BRT 2020
+Total de Clientes cadastrados: 3
+Idade média de todo o público da unidade: 25
+Idade média do público masculino: 18
+Idade média do público feminino : 37
+Idade média do público de gênero não binário: 22
+Produto mais consumido: Shampoo Ondulados
+Produto mais consumido pelo público feminino: Shampoo Ondulados
+Produto mais consumido pelo público masculino: Shampoo Ondulados
+Produto mais consumido pelo público de gênero não binário: Shampoo Ondulados
